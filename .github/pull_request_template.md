@@ -1,10 +1,10 @@
 ## Title 
 
 ## Changes 
--[x] Bug fix ...  
--[x] Add feature  
--[x] Docs update  
-etc.
+- [x] Bug fix ...  
+- [x] Add feature  
+- [x] Docs update  
+
 
 ## Screenshots (if appropriate):
 
