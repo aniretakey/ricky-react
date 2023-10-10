@@ -8,7 +8,35 @@
     "build": "tsc && vite build",
     "lint": "eslint --fix ./src",
     "format": "prettier -w ./src",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "precommit": "lint-staged && commitlint -E HUSKY_GIT_PARAMS"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.jsx": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.tsx": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
@@ -18,6 +46,8 @@
     "react-router-dom": "^6.16.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.7.2",
+    "@commitlint/config-conventional": "^17.7.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
@@ -31,6 +61,8 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
     "prettier": "3.0.3",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
