@@ -8,7 +8,8 @@
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:import/typescript",
-    "plugin:react/jsx-runtime"
+    "plugin:react/jsx-runtime",
+    "airbnb"
   ],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
