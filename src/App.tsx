@@ -1,7 +1,7 @@
 import './App.css';
-import React from 'react';
+import { ReactElement } from 'react';
 
-function App() {
+function App(): ReactElement {
   return <>Hello!</>;
 }
 

@@ -1,0 +1,33 @@
+:root {
+  --black-color: #252525;
+  --white-color: #fff;
+  --dark-green-color: #70d026;
+  --light-green-color: #beec65;
+  --yellow-color: #fef377;
+  --blue-color: #a8d6e6;
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--black-color);
+  color: var(--dark-green-color);
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: var(--black-color)
+}
+
+ul {
+  list-style: none;
+}
