@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Autour+One&display=swap');
+
 :root {
   --black-color: #252525;
   --white-color: #fff;
@@ -15,6 +17,7 @@
 }
 
 body {
+  font-family: "Autour One", cursive;
   background: var(--black-color);
   color: var(--dark-green-color);
 }
