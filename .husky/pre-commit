@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 # npm test
-protected_branches=("main" "develop")
+protected_branches=("master" "develop")
 current_branch=$(git branch --show-current)
 
 for branch in "${protected_branches[@]}"; do
