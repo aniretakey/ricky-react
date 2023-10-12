@@ -7,7 +7,6 @@
   --light-green-color: #beec65;
   --yellow-color: #fef377;
   --blue-color: #a8d6e6;
-
 }
 
 * {
@@ -17,9 +16,12 @@
 }
 
 body {
-  font-family: "Autour One", cursive;
+  font-family: 'Autour One', cursive;
   background: var(--black-color);
   color: var(--dark-green-color);
+  background: url('./assets/photos/header-bg.jpg');
+  background-size: contain;
+  padding: 0 1em;
 }
 
 button {
@@ -28,7 +30,7 @@ button {
 
 a {
   text-decoration: none;
-  color: var(--black-color)
+  color: var(--black-color);
 }
 
 ul {
