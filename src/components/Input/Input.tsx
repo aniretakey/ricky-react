@@ -1,33 +1,45 @@
-import { ImSearch } from 'react-icons/im';
-import { ChangeEvent, useRef, useState } from 'react';
-
+import React, { ChangeEvent, ReactElement, Ref, forwardRef, useState } from 'react';
 import styles from './Input.module.css';
+import { TypeValidator } from '../../models/models';
 
-export function Input() {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const [text, setText] = useState<string>('');
-  // TODO сделать с помощью useDeferredValue (https://www.youtube.com/watch?v=jCGMedd6IWA&ab_channel=WebDevSimplified)
-  const focus = () => {
-    inputRef.current?.focus();
-  };
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
-    setText(event.target.value);
-  };
-  return (
-    <div className={styles.inputHandler}>
+interface IInputProps {
+  placeholder: string;
+  text: string;
+  setText: React.Dispatch<React.SetStateAction<string>>;
+  type?: string;
+  id?: string;
+  validator?: TypeValidator;
+}
+
+const Input = forwardRef(
+  (
+    { placeholder, setText, text, type, id, validator = (value): boolean=> value.trim().length === 0 }: IInputProps,
+    ref: Ref<HTMLInputElement>,
+  ): ReactElement => {
+    const [error, setError] = useState<boolean>(false);
+
+
+
+    const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
+      setText(event.target.value);
+      if (validator) {
+        setError(validator(event.target.value));
+      }
+    };
+
+    return (
       <input
-        className={styles.input}
-        ref={inputRef}
+        className={`${styles.input} ${error && styles.error} `}
         maxLength={50}
-        placeholder="Search..."
+        placeholder={placeholder}
         value={text}
         onInput={handleInput}
+        ref={ref}
+        type={type}
+        id={id}
       />
-      <div className={styles.handlerSearchIcon}>
-        <ImSearch className={styles.search} onClick={focus} />
-      </div>
-      {/* TODO сделать компонент dropdown category*/}
-      <div className={styles.category}>Category</div>
-    </div>
-  );
-}
+    );
+  },
+);
+
+export default Input;

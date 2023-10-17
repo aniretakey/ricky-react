@@ -7,7 +7,7 @@
   border-radius: 1em 1.6em;
   background: var(--dark-green-color);
   transition: 0.3s all ease-in-out;
-
+  user-select: none;
 }
 
 .button:hover {
