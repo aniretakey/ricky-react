@@ -74,7 +74,7 @@ const Register = (): ReactElement => {
           <AiOutlineEye className={styles.icon} onClick={showPasswordHandler} />
         )}
       </div>
-      <Button buttonText="Sign Up" type="submit" isButtonEnable={isButtonActive} />
+      <Button buttonText="Sign Up" type="submit" isButtonEnable={!isButtonActive} />
       <span className={styles.message}>Already has and account? <Link to='/login'>Authorize  here.</Link></span>
     </form>
   );
