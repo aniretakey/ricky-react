@@ -13,12 +13,10 @@ interface IInputProps {
 
 const Input = forwardRef(
   (
-    { placeholder, setText, text, type, id, validator = (value): boolean=> value.trim().length === 0 }: IInputProps,
+    { placeholder, setText, text, type, id, validator = (value): boolean=> value.trim().length !== 0 }: IInputProps,
     ref: Ref<HTMLInputElement>,
   ): ReactElement => {
     const [error, setError] = useState<boolean>(false);
-
-
 
     const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
       setText(event.target.value);
@@ -29,7 +27,7 @@ const Input = forwardRef(
 
     return (
       <input
-        className={`${styles.input} ${error && styles.error} `}
+        className={`${styles.input} ${(!error && text.length > 0) ? styles.inputError : styles.inputCorrect} `}
         maxLength={50}
         placeholder={placeholder}
         value={text}
