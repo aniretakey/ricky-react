@@ -23,5 +23,14 @@
 }
 
 .message a{
-  text-decoration: underline var(--yellow-color) 3px;
+  background-color: var(--dark-green-color);
+  border: .25em var(--light-green-color) solid;
+  border-radius: var(--radius-border);
+  padding: .2em .5em;
+
+  transition: 400ms;
+}
+
+.message a:hover{
+  background-color: var(--light-green-color);
 }

@@ -12,10 +12,10 @@
   width: 100%;
 }
 
-.input:focus {
+.inputCorrect:focus {
   outline: 6px solid var(--light-green-color);
 }
 
-.error {
+.inputError:focus {
   outline: 6px solid var(--red-color);
 }

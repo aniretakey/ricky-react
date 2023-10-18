@@ -3,7 +3,7 @@ export interface IButtonProps {
   handleClick?: () => void;
   fontSize?: number;
   type?: "button" | "submit" | "reset" | undefined;
+  isButtonEnable?: boolean;
 }
 
-// eslint-disable-next-line no-unused-vars
 export type TypeValidator = (value: string) => boolean

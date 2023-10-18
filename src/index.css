@@ -3,12 +3,13 @@
 :root {
   --black-color: #252525;
   --white-color: #fff;
+  --gray-color: #646464;
   --dark-green-color: #70d026;
   --light-green-color: #beec65;
   --yellow-color: #fef377;
   --blue-color: #a8d6e6;
   --red-color: #b44755;
-
+  --radius-border: 1em 1.6em;
 }
 
 * {
