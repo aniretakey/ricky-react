@@ -1,4 +1,4 @@
-import { FormEvent, ReactElement, useState } from 'react';
+import { FormEvent, ReactElement, useEffect, useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import styles from './register.module.css';
 import Input from '../../components/Input/Input';
@@ -10,17 +10,26 @@ const Register = (): ReactElement => {
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [mail, setMail] = useState<string>('')
+
+  const [isButtonActive, setButtonActive] = useState<boolean>(false)
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  useEffect(() => {
+    setButtonActive([(login.trim().length !== 0), passwordValidation(password), emailValidation(mail)].every(item => item))
+  }, [login, password, mail])
 
   const showPasswordHandler = (): void => {
     setShowPassword((prev) => !prev);
   };
-  const handleSubmit = (e: FormEvent): void => e.preventDefault();
   const emailValidation: TypeValidator = (value) => {
     const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     return emailPattern.test(value);
   }
-  
+  const passwordValidation: TypeValidator = (value) => value.trim().length > 6
+  const handleSubmit = (e: FormEvent): void => {
+    e.preventDefault()
+  };
+
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <h1>Registration</h1>
@@ -57,6 +66,7 @@ const Register = (): ReactElement => {
           type={showPassword ? 'text' : 'password'}
           text={password}
           setText={setPassword}
+          validator={passwordValidation}
         />
         {showPassword ? (
           <AiOutlineEyeInvisible className={styles.icon} onClick={showPasswordHandler} />
@@ -64,7 +74,7 @@ const Register = (): ReactElement => {
           <AiOutlineEye className={styles.icon} onClick={showPasswordHandler} />
         )}
       </div>
-      <Button buttonText="Sign Up" type="submit" />
+      <Button buttonText="Sign Up" type="submit" isButtonEnable={isButtonActive} />
       <span className={styles.message}>Already has and account? <Link to='/login'>Authorize  here.</Link></span>
     </form>
   );

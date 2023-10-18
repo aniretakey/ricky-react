@@ -20,9 +20,8 @@ const Input = forwardRef(
 
     const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
       setText(event.target.value);
-      if (validator) {
-        setError(validator(event.target.value));
-      }
+      setError(validator(event.target.value));
+
     };
 
     return (

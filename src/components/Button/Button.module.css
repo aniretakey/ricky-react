@@ -13,3 +13,11 @@
 .button:hover {
   background-color: var(--light-green-color);
 }
+
+.buttonDisabled,
+.buttonDisabled:hover {
+  cursor: not-allowed;
+  opacity: 0.65;
+  border: 4px solid var(--black-color);
+  background-color: var(--gray-color);
+}
