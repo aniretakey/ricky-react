@@ -15,7 +15,7 @@ export type CharacterType = {
   };
   image: string;
   episode?: string[];
-  url: string;
+  url?: string;
   created?: string;
 };
 

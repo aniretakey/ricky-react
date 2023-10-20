@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { Search } from '../../components/Search';
-import Card from '../../components/Card/Card';
+import { CardSmall } from '../../components/CardSmall';
 
 export default function Home(): ReactElement {
   const item = {
@@ -26,7 +26,7 @@ export default function Home(): ReactElement {
   return (
     <div>
       <Search />
-      <Card
+      <CardSmall
         name={item.name}
         image={item.image}
         id={item.id}
