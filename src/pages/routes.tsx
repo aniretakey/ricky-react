@@ -1,8 +1,8 @@
 import { RouteObject } from 'react-router-dom';
-import { Modal } from "../components/Modal";
-import { Login } from "./Login";
-import { Register } from "./Register";
-import { Home } from "./Home";
+import { Modal } from '../components/Modal';
+import { Login } from './Login';
+import { Register } from './Register';
+import { Home } from './Home';
 
 const routes: RouteObject[] = [
   {
@@ -12,7 +12,7 @@ const routes: RouteObject[] = [
   {
     path: '/signup',
     element: (
-      <Modal >
+      <Modal>
         <Register />
       </Modal>
     ),
@@ -20,10 +20,14 @@ const routes: RouteObject[] = [
   {
     path: '/login',
     element: (
-      <Modal >
+      <Modal>
         <Login />
       </Modal>
     ),
+  },
+  {
+    path: '/search',
+    element: null,
   },
 ];
 
