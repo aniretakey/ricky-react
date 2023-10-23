@@ -1,0 +1,45 @@
+.history {
+  background: var(--dark-green-color);
+  border-radius: var(--radius-border);
+  padding: 20px;
+  margin: 0 auto;
+  width: 1000px;
+  color: var(--black-color);
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: var(--radius-border);
+  padding: 20px;
+  background: var(--light-green-color);
+
+}
+
+.item a {
+  border: 4px dotted var(--dark-green-color);
+  border-radius: var(--radius-border);
+  padding: 5px;
+  margin-left: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.item a:hover {
+  background: var(--dark-green-color);
+}

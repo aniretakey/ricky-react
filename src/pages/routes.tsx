@@ -4,6 +4,7 @@ import { Login } from './Login';
 import { Register } from './Register';
 import { Home } from './Home';
 import { SearchPage } from './SearchPage';
+import { History } from './History';
 
 const routes: RouteObject[] = [
   {
@@ -29,6 +30,10 @@ const routes: RouteObject[] = [
   {
     path: '/search',
     element: <SearchPage />,
+  },
+  {
+    path: '/history',
+    element: <History />,
   },
 ];
 

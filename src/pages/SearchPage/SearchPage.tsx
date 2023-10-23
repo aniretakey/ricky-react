@@ -9,7 +9,7 @@ export function SearchPage(): ReactElement {
   const location = useLocation();
   const searchName = new URLSearchParams(location.search);
   const name = searchName.get('name');
-
+  // TODO сделать значения из url сохранялось в истории и в search input
   const { data } = useGetCharacterByNameQuery(name ?? '');
 
   return (
