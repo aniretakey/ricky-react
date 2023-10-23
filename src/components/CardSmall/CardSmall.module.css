@@ -8,6 +8,7 @@
   gap: 10px;
   color:  var(--black-color);
   text-align: center;
+  position: relative;
 }
 
 .image {
