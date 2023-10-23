@@ -11,7 +11,7 @@ interface IInputProps {
   validator?: TypeValidator;
 }
 
-const Input = forwardRef(
+export const Input = forwardRef(
   (
     { placeholder, setText, text, type, id, validator = (value): boolean=> value.trim().length !== 0 }: IInputProps,
     ref: Ref<HTMLInputElement>,
@@ -38,5 +38,3 @@ const Input = forwardRef(
     );
   },
 );
-
-export default Input;

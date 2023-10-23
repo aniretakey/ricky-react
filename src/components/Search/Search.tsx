@@ -1,9 +1,8 @@
 import { ImSearch } from 'react-icons/im';
 import { ReactElement, useRef, useState } from 'react';
+import { Input } from "../Input";
 
 import styles from './Search.module.css';
-import Input from '../Input/Input';
-
 
 export function Search(): ReactElement {
   const inputRef = useRef<HTMLInputElement | null>(null);

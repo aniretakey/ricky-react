@@ -1,12 +1,12 @@
 import { FormEvent, ReactElement, useEffect, useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import styles from './register.module.css';
-import Input from '../../components/Input/Input';
-import Button from '../../components/Button/Button';
 import { Link } from "react-router-dom";
 import { TypeValidator } from "../../models/models.ts";
+import { Input } from "../../components/Input";
+import { Button } from "../../components/Button";
 
-const Register = (): ReactElement => {
+export const Register = (): ReactElement => {
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [mail, setMail] = useState<string>('')
@@ -79,5 +79,3 @@ const Register = (): ReactElement => {
     </form>
   );
 };
-
-export default Register;

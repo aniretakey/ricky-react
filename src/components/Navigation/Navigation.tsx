@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../Button/Button';
+import { Button } from "../Button";
 
-function Navigation(): ReactElement {
+export function Navigation(): ReactElement {
   const navigate = useNavigate();
   
   const handleSignUp = (): void => {
@@ -19,5 +19,3 @@ function Navigation(): ReactElement {
     </nav>
   );
 }
-
-export default Navigation;

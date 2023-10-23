@@ -1,11 +1,11 @@
 import { FormEvent, ReactElement, useEffect, useState } from 'react';
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import styles from './login.module.css';
-import Input from '../../components/Input/Input';
-import Button from '../../components/Button/Button';
 import { Link } from "react-router-dom";
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { Button } from "../../components/Button";
+import { Input } from "../../components/Input";
+import styles from './login.module.css';
 
-const Login = (): ReactElement => {
+export const Login = (): ReactElement => {
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -50,5 +50,3 @@ const Login = (): ReactElement => {
     </form>
   );
 };
-
-export default Login;

@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import styles from './Button.module.css';
 import { IButtonProps } from '../../models/models';
 
-const Button = ({ buttonText, handleClick, fontSize = 18, type = 'button', isButtonEnable = false }: IButtonProps): ReactElement => {
+export const Button = ({ buttonText, handleClick, fontSize = 18, type = 'button', isButtonEnable = false }: IButtonProps): ReactElement => {
   console.log(isButtonEnable)
   return (
     <button
@@ -16,5 +16,3 @@ const Button = ({ buttonText, handleClick, fontSize = 18, type = 'button', isBut
     </button>
   )
 };
-
-export default Button;

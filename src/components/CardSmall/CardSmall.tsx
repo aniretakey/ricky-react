@@ -1,9 +1,9 @@
 import { ReactElement } from 'react';
 
 import styles from './CardSmall.module.css';
-import Button from '../Button/Button';
 
 import { CharacterType } from '../../models/card.model';
+import { Button } from "../Button";
 
 export const CardSmall = ({ image, name }: CharacterType): ReactElement => {
   return (

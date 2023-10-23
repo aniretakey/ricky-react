@@ -8,7 +8,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-function Modal({ onClose, children }: ModalProps): ReactElement {
+export function Modal({ onClose, children }: ModalProps): ReactElement {
   const navigate = useNavigate();
   const handleClose = ():void => {
     
@@ -29,5 +29,3 @@ function Modal({ onClose, children }: ModalProps): ReactElement {
     </div>
   );
 }
-
-export default Modal;
