@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { ImSearch } from 'react-icons/im';
 import { KeyboardEventHandler, MouseEventHandler, ReactElement, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -9,8 +10,8 @@ import { useAppSelector } from '../../hooks/useAppSelector.ts';
 
 export function Search(): ReactElement {
   const navigate = useNavigate();
+
   const inputRef = useRef<HTMLInputElement | null>(null);
-  // const [text, setText] = useState<string>('');
   const { setHistory, setValue } = useActions();
   const { value } = useAppSelector((state) => state.searchValues);
 
@@ -18,19 +19,21 @@ export function Search(): ReactElement {
   const focus = (): void => {
     inputRef.current?.focus();
   };
+  const handleSearch = ():void => {
+    setHistory();
+    navigate(`/search/?name=${value}`);
+  };
 
   const handleEnter: KeyboardEventHandler = (event): void => {
     if (event.key === 'Enter' && inputRef.current?.value.trim().length !== 0) {
-      setHistory();
-      navigate(`/search/?name=${value}`);
+      handleSearch();
     }
   };
 
   const handleClick: MouseEventHandler = (): void => {
     focus();
     if (inputRef.current?.value.trim().length !== 0) {
-      setHistory();
-      navigate(`/search/?name=${value}`);
+      handleSearch();
     }
   };
 
