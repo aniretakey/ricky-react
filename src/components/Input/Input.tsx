@@ -1,11 +1,12 @@
 import React, { ChangeEvent, ReactElement, Ref, forwardRef, useState } from 'react';
 import styles from './Input.module.css';
 import { TypeValidator } from '../../models/models';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
 interface IInputProps {
   placeholder: string;
   text: string;
-  setText: React.Dispatch<React.SetStateAction<string>>;
+  setValue: React.Dispatch<React.SetStateAction<string>> | ActionCreatorWithPayload<string, 'searchValues/setValue'>;
   type?: string;
   id?: string;
   validator?: TypeValidator;
@@ -13,20 +14,19 @@ interface IInputProps {
 
 export const Input = forwardRef(
   (
-    { placeholder, setText, text, type, id, validator = (value): boolean=> value.trim().length !== 0 }: IInputProps,
+    { placeholder, setValue, text, type, id, validator = (value): boolean => value.trim().length !== 0 }: IInputProps,
     ref: Ref<HTMLInputElement>,
   ): ReactElement => {
     const [error, setError] = useState<boolean>(false);
 
     const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
-      setText(event.target.value);
+      setValue(event.target.value);
       setError(validator(event.target.value));
-
     };
 
     return (
       <input
-        className={`${styles.input} ${(!error && text.length > 0) ? styles.inputError : styles.inputCorrect} `}
+        className={`${styles.input} ${!error && text.length > 0 ? styles.inputError : styles.inputCorrect} `}
         maxLength={50}
         placeholder={placeholder}
         value={text}

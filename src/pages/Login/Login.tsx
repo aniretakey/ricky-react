@@ -1,8 +1,8 @@
 import { FormEvent, ReactElement, useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import { Button } from "../../components/Button";
-import { Input } from "../../components/Input";
+import { Button } from '../../components/Button';
+import { Input } from '../../components/Input';
 import styles from './login.module.css';
 
 export const Login = (): ReactElement => {
@@ -10,24 +10,24 @@ export const Login = (): ReactElement => {
   const [password, setPassword] = useState<string>('');
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [isButtonActive, setIsButtonActive] = useState<boolean>(false)
+  const [isButtonActive, setIsButtonActive] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsButtonActive(![login.trim().length > 0, password.trim().length > 6].every(item => item))
-  }, [password, login])
+    setIsButtonActive(![login.trim().length > 0, password.trim().length > 6].every((item) => item));
+  }, [password, login]);
 
   const showPasswordHandler = (): void => {
     setShowPassword((prev) => !prev);
   };
   const handleSubmit = (e: FormEvent): void => e.preventDefault();
-  
+
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <h1>Log In</h1>
-      <label className={styles.label} htmlFor="Login" aria-autocomplete='none'>
+      <label className={styles.label} htmlFor="Login" aria-autocomplete="none">
         Login
       </label>
-      <Input id="Login" placeholder="Enter Login" type="text" text={login} setText={setLogin} />
+      <Input id="Login" placeholder="Enter Login" type="text" text={login} setValue={setLogin} />
       <label className={styles.label} htmlFor="Password">
         Password
       </label>
@@ -37,7 +37,7 @@ export const Login = (): ReactElement => {
           placeholder="Enter Password"
           type={showPassword ? 'text' : 'password'}
           text={password}
-          setText={setPassword}
+          setValue={setPassword}
         />
         {showPassword ? (
           <AiOutlineEyeInvisible className={styles.icon} onClick={showPasswordHandler} />
@@ -46,7 +46,9 @@ export const Login = (): ReactElement => {
         )}
       </div>
       <Button buttonText="Log In" type="submit" isButtonEnable={isButtonActive} />
-      <span className={styles.message}>New here? <Link to='/signup'>Register here.</Link></span>
+      <span className={styles.message}>
+        New here? <Link to="/signup">Register here.</Link>
+      </span>
     </form>
   );
 };

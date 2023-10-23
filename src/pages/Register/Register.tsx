@@ -1,22 +1,24 @@
 import { FormEvent, ReactElement, useEffect, useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import styles from './register.module.css';
-import { Link } from "react-router-dom";
-import { TypeValidator } from "../../models/models.ts";
-import { Input } from "../../components/Input";
-import { Button } from "../../components/Button";
+import { Link } from 'react-router-dom';
+import { TypeValidator } from '../../models/models.ts';
+import { Input } from '../../components/Input';
+import { Button } from '../../components/Button';
 
 export const Register = (): ReactElement => {
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [mail, setMail] = useState<string>('')
+  const [mail, setMail] = useState<string>('');
 
-  const [isButtonActive, setButtonActive] = useState<boolean>(false)
+  const [isButtonActive, setButtonActive] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   useEffect(() => {
-    setButtonActive([(login.trim().length !== 0), passwordValidation(password), emailValidation(mail)].every(item => item))
-  }, [login, password, mail])
+    setButtonActive(
+      [login.trim().length !== 0, passwordValidation(password), emailValidation(mail)].every((item) => item),
+    );
+  }, [login, password, mail]);
 
   const showPasswordHandler = (): void => {
     setShowPassword((prev) => !prev);
@@ -24,10 +26,10 @@ export const Register = (): ReactElement => {
   const emailValidation: TypeValidator = (value) => {
     const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     return emailPattern.test(value);
-  }
-  const passwordValidation: TypeValidator = (value) => value.trim().length > 6
+  };
+  const passwordValidation: TypeValidator = (value) => value.trim().length > 6;
   const handleSubmit = (e: FormEvent): void => {
-    e.preventDefault()
+    e.preventDefault();
   };
 
   return (
@@ -36,23 +38,17 @@ export const Register = (): ReactElement => {
       <label className={styles.label} htmlFor="Login">
         Login
       </label>
-      <Input
-        id="Login"
-        placeholder="Enter Login"
-        type="text"
-        text={login}
-        setText={setLogin}
-      />
+      <Input id="Login" placeholder="Enter Login" type="text" text={login} setValue={setLogin} />
 
-      <label className={styles.label} htmlFor='Email'>
+      <label className={styles.label} htmlFor="Email">
         Email
       </label>
       <Input
-        id='Email'
+        id="Email"
         placeholder={`Enter email`}
         text={mail}
-        setText={setMail}
-        type='email'
+        setValue={setMail}
+        type="email"
         validator={emailValidation}
       />
 
@@ -65,7 +61,7 @@ export const Register = (): ReactElement => {
           placeholder="Enter Password"
           type={showPassword ? 'text' : 'password'}
           text={password}
-          setText={setPassword}
+          setValue={setPassword}
           validator={passwordValidation}
         />
         {showPassword ? (
@@ -75,7 +71,9 @@ export const Register = (): ReactElement => {
         )}
       </div>
       <Button buttonText="Sign Up" type="submit" isButtonEnable={!isButtonActive} />
-      <span className={styles.message}>Already has and account? <Link to='/login'>Authorize  here.</Link></span>
+      <span className={styles.message}>
+        Already has and account? <Link to="/login">Authorize here.</Link>
+      </span>
     </form>
   );
 };
