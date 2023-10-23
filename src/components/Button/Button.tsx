@@ -2,8 +2,7 @@ import { ReactElement } from 'react';
 import styles from './Button.module.css';
 import { IButtonProps } from '../../models/models';
 
-const Button = ({ buttonText, handleClick, fontSize = 18, type = 'button', isButtonEnable = false }: IButtonProps): ReactElement => {
-  console.log(isButtonEnable)
+export const Button = ({ buttonText, handleClick, fontSize = 18, type = 'button', isButtonEnable = false }: IButtonProps): ReactElement => {
   return (
     <button
       className={`${styles.button} ${isButtonEnable ? styles.buttonDisabled : ''}`}
@@ -16,5 +15,3 @@ const Button = ({ buttonText, handleClick, fontSize = 18, type = 'button', isBut
     </button>
   )
 };
-
-export default Button;

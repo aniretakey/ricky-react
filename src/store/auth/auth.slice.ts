@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AuthType } from "./auth.model.ts";
 
+const initialState = {
+	users: []
+}
+
 export const authSlice: AuthType = createSlice({
 	name: 'auth',
-	initialState: {
-		users: []
-	},
+	initialState,
 	reducers: {
 		confirm(state, action){
 			console.log('confirm')

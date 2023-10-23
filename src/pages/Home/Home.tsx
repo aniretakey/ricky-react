@@ -1,8 +1,9 @@
 import { ReactElement } from 'react';
 import { Search } from '../../components/Search';
 import { CardSmall } from '../../components/CardSmall';
+import { CardModal } from "../../components/CardModal";
 
-export default function Home(): ReactElement {
+export function Home(): ReactElement {
   const item = {
     id: 361,
     name: 'Toxic Rick',
@@ -36,6 +37,7 @@ export default function Home(): ReactElement {
         gender={item.gender}
         url={item.url}
       />
+      {/*<CardModal />*/}
     </div>
   );
 }

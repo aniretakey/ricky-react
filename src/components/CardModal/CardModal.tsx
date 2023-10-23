@@ -1,23 +1,25 @@
 import { ReactElement } from 'react';
+import { useGetCharacterByIdQuery } from "../../store/characters/characters.api.ts";
 import { createPortal } from 'react-dom';
+import { Modal } from "../Modal";
 import styles from './CardModal.module.css';
-import Modal from '../Modal/Modal';
-import { CharacterType } from '../../models/card.model';
 
-export const CardSmall = ({ image, name, gender, species, status, type }: CharacterType): ReactElement => {
+export const CardModal = (): ReactElement => {
+  const { data } = useGetCharacterByIdQuery(635)
+
   return createPortal(
     <Modal>
-      <div className={styles.cardOpen}>
+        <div className={styles.cardOpen}>
         <div className={styles.imageOpen}>
-          <img src={image} alt={name} />
+          <img src={data?.image} alt={data?.name} />
         </div>
         <div className={styles.description}>
           <ul>
-            {name && <li>{name}</li>}
-            {gender && <li>{gender}</li>}
-            {species && <li>{species}</li>}
-            {status && <li>{status}</li>}
-            {type && <li>{type}</li>}
+            {data?.name && <li>{data.name}</li>}
+            {data?.gender && <li>{data.gender}</li>}
+            {data?.species && <li>{data.species}</li>}
+            {data?.status && <li>{data.status}</li>}
+            {data?.type && <li>{data.type}</li>}
           </ul>
         </div>
       </div>

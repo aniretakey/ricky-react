@@ -1,10 +1,8 @@
 import { RouteObject } from 'react-router-dom';
-import Home from './Home/Home';
-import Modal from '../components/Modal/Modal';
-import Register from './Register/Register';
-import Login from "./Login/Login.tsx";
-
-
+import { Modal } from "../components/Modal";
+import { Login } from "./Login";
+import { Register } from "./Register";
+import { Home } from "./Home";
 
 const routes: RouteObject[] = [
   {
