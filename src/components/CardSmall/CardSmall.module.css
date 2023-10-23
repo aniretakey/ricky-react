@@ -7,6 +7,7 @@
   place-items: center;
   gap: 10px;
   color:  var(--black-color);
+  text-align: center;
 }
 
 .image {

@@ -3,6 +3,7 @@ import { Modal } from '../components/Modal';
 import { Login } from './Login';
 import { Register } from './Register';
 import { Home } from './Home';
+import { SearchPage } from './SearchPage';
 
 const routes: RouteObject[] = [
   {
@@ -27,7 +28,7 @@ const routes: RouteObject[] = [
   },
   {
     path: '/search',
-    element: null,
+    element: <SearchPage />,
   },
 ];
 
