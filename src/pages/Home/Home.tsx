@@ -37,7 +37,7 @@ export function Home(): ReactElement {
         gender={item.gender}
         url={item.url}
       />
-      <CardModal />
+      {/*<CardModal />*/}
     </div>
   );
 }
