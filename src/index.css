@@ -22,7 +22,7 @@ body {
   font-family: 'Autour One', cursive;
   background: var(--black-color);
   color: var(--dark-green-color);
-  background: url('./assets/photos/header-bg.jpg');
+  background: var(--black-color);
   background-size: contain;
   padding: 0 1em;
   max-width: 1280px;
