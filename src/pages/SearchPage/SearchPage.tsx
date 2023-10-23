@@ -1,11 +1,17 @@
 import { ReactElement } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Search } from '../../components/Search';
 import styles from './SearchPage.module.css';
-import { useGetAllCharactersQuery } from '../../store/characters/characters.api.ts';
+import { useGetCharacterByNameQuery } from '../../store/characters/characters.api.ts';
 import { CardSmall } from '../../components/CardSmall';
 
 export function SearchPage(): ReactElement {
-  const { data } = useGetAllCharactersQuery(null);
+  const location = useLocation();
+  const searchName = new URLSearchParams(location.search);
+  const name = searchName.get('name');
+
+  const { data } = useGetCharacterByNameQuery(name ?? '');
+
   return (
     <div className={styles.wrapper}>
       <Search />

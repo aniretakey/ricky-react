@@ -22,7 +22,7 @@ export function Search(): ReactElement {
   const handleEnter: KeyboardEventHandler = (event): void => {
     if (event.key === 'Enter' && inputRef.current?.value.trim().length !== 0) {
       setHistory();
-      navigate('/search');
+      navigate(`/search/?name=${value}`);
     }
   };
 
@@ -30,7 +30,7 @@ export function Search(): ReactElement {
     focus();
     if (inputRef.current?.value.trim().length !== 0) {
       setHistory();
-      navigate('/search');
+      navigate(`/search/?name=${value}`);
     }
   };
 
