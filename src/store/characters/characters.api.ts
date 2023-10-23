@@ -13,7 +13,15 @@ export const charactersApi = createApi({
     getAllCharacters: build.query<RickyTypes, null>({
       query: () => '/character',
     }),
+    getCharacterByName: build.query<RickyTypes, string>({
+      query: (name) => ({
+        url: '/character/',
+        params: {
+          name
+        }
+      }),
+    }),
   }),
 });
 
-export const { useGetCharacterByIdQuery, useGetAllCharactersQuery } = charactersApi;
+export const { useGetCharacterByIdQuery, useGetAllCharactersQuery, useGetCharacterByNameQuery } = charactersApi;

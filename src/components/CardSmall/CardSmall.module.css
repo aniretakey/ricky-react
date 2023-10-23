@@ -9,6 +9,7 @@
   color:  var(--black-color);
   text-align: center;
   position: relative;
+  user-select: none;
 }
 
 .image {
@@ -19,7 +20,9 @@
   margin: 0 10px;
   border-radius: var(--radius-border);
 }
-
+.title{
+  max-width: 80%;
+}
 .image img {
   aspect-ratio: 1/1;
   width: 90%;

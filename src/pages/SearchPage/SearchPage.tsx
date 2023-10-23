@@ -6,6 +6,7 @@ import { CardSmall } from '../../components/CardSmall';
 
 export function SearchPage(): ReactElement {
   const { data } = useGetAllCharactersQuery(null);
+
   return (
     <div className={styles.wrapper}>
       <Search />
