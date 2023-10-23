@@ -3,7 +3,6 @@ import styles from './Button.module.css';
 import { IButtonProps } from '../../models/models';
 
 export const Button = ({ buttonText, handleClick, fontSize = 18, type = 'button', isButtonEnable = false }: IButtonProps): ReactElement => {
-  console.log(isButtonEnable)
   return (
     <button
       className={`${styles.button} ${isButtonEnable ? styles.buttonDisabled : ''}`}
