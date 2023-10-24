@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AuthType } from "./auth.model.ts";
+import { UserType } from "./auth.model.ts";
 
 const initialState = {
-	users: []
+	users: [] as UserType[]
 }
 
-export const authSlice: AuthType = createSlice({
+export const authSlice = createSlice({
 	name: 'auth',
 	initialState,
 	reducers: {
@@ -16,7 +16,9 @@ export const authSlice: AuthType = createSlice({
 		},
 		addUser(state, { payload}){
 			state.users.push(payload)
-		}
+			localStorage.setItem('users', JSON.stringify(state.users));
+		},
+
 	}
 })
 

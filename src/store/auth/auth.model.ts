@@ -5,7 +5,7 @@ export type UserType = {
 	password: string;
 }
 
-export type AuthType =  Slice<{users: never[]}, {
+export type AuthType =  Slice<{users: AuthType[]}, {
 	confirm(state: { users: UserType[] }, action: {payload: any, type: string}): void
 	addUser(state: { users: UserType[] }, action: { payload: UserType }): void
 }, "auth">
