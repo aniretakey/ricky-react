@@ -4,7 +4,7 @@ import { FormEvent, ReactElement, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-
+import { useNavigate } from 'react-router';
 import styles from './register.module.css';
 
 import { TypeValidator } from '../../models/models.ts';
@@ -14,7 +14,8 @@ import { useActions } from '../../hooks/useActions.ts';
 import { useAppSelector } from '../../hooks/useAppSelector.ts';
 
 export const Register = (): ReactElement => {
-  const { addUser } = useActions();
+  const navigate = useNavigate();
+  const { addUser, setCurrentUser } = useActions();
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [mail, setMail] = useState<string>('');
@@ -47,13 +48,15 @@ export const Register = (): ReactElement => {
       return;
     }
     addUser({ login, password });
+    setCurrentUser({ login });
+    navigate('/');
   };
 
   return (
     <form
       onSubmit={handleSubmit}
       className={styles.form}
-      onChange={():void => {
+      onChange={(): void => {
         setExistingUser(false);
       }}
     >
