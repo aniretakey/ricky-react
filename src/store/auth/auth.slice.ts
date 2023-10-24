@@ -49,7 +49,28 @@ export const authSlice = createSlice({
       newState.currentUser = {
         ...newState.currentUser,
         login: payload.login,
-        favourites: payload.favourites,
+      };
+      localStorage.setItem('currentUser', JSON.stringify(newState.currentUser));
+      return newState;
+    },
+    addFavouritesForUser(state, { payload }) {
+      const newState = { ...state }; // Создаем копию состояния
+      newState.currentUser = {
+        ...newState.currentUser,
+        favourites: [...state.currentUser.favourites, payload],
+      };
+      localStorage.setItem('currentUser', JSON.stringify(newState.currentUser));
+      return newState;
+    },
+    removeFavouritesForUser(state, { payload }) {
+      const updatedFavourites = state.currentUser.favourites.filter((item) => item !== payload);
+
+      const newState = {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          favourites: updatedFavourites,
+        },
       };
       localStorage.setItem('currentUser', JSON.stringify(newState.currentUser));
       return newState;
