@@ -5,6 +5,7 @@ import { Register } from './Register';
 import { Home } from './Home';
 import { SearchPage } from './SearchPage';
 import { History } from './History';
+import { Favourites } from './Favourites';
 
 const routes: RouteObject[] = [
   {
@@ -34,6 +35,10 @@ const routes: RouteObject[] = [
   {
     path: '/history',
     element: <History />,
+  },
+  {
+    path: '/favourites',
+    element: <Favourites />,
   },
 ];
 

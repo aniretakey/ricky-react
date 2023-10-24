@@ -1,10 +1,10 @@
 .favourites {
-  background: var(--dark-green-color);
+  background: var(--black-color);
   border-radius: var(--radius-border);
   padding: 20px;
   margin: 0 auto;
   width: 1000px;
-  color: var(--black-color);
+  color: var(--dark-green-color);
   text-align: center;
 }
 

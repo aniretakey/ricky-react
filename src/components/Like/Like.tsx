@@ -5,7 +5,7 @@ import { useActions } from '../../hooks/useActions';
 import { useAppSelector } from '../../hooks/useAppSelector';
 
 interface LikeProps {
-  id: string; // Определите конкретный тип для свойства id
+  id: number; 
 }
 export const Like = ({ id }: LikeProps): ReactElement => {
   const currentUserFavourites = useAppSelector((state) => state.auth.currentUser.favourites);
@@ -13,7 +13,7 @@ export const Like = ({ id }: LikeProps): ReactElement => {
   const [like, setLike] = useState(false);
   const handleLike = (): void => {
     setLike((prev) => !prev);
-    const likeExist = currentUserFavourites.some((item) => +item === +id);
+    const likeExist = currentUserFavourites.some((item) => item === id);
 
     if (likeExist) {
       removeFavouritesForUser(id)
