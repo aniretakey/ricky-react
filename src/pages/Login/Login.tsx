@@ -1,16 +1,21 @@
 import { FormEvent, ReactElement, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import styles from './login.module.css';
+import { useAppSelector } from '../../hooks/useAppSelector.ts';
 
 export const Login = (): ReactElement => {
+  const navigate = useNavigate();
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-
+  const [userNotExist, setUserNotExist] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isButtonActive, setIsButtonActive] = useState<boolean>(false);
+
+  const existingUsers = useAppSelector((state) => state.auth.users);
 
   useEffect(() => {
     setIsButtonActive(![login.trim().length > 0, password.trim().length > 6].every((item) => item));
@@ -19,10 +24,25 @@ export const Login = (): ReactElement => {
   const showPasswordHandler = (): void => {
     setShowPassword((prev) => !prev);
   };
-  const handleSubmit = (e: FormEvent): void => e.preventDefault();
+  const handleSubmit = (e: FormEvent): void => {
+    e.preventDefault();
+    const userExists = existingUsers.some((user) => user.login === login && user.password === password);
+    if (userExists) {
+      setUserNotExist(false);
+      navigate('/');
+    } else {
+      setUserNotExist(true);
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
+    <form
+      onSubmit={handleSubmit}
+      className={styles.form}
+      onChange={(): void => {
+        setUserNotExist(false);
+      }}
+    >
       <h1>Log In</h1>
       <label className={styles.label} htmlFor="Login" aria-autocomplete="none">
         Login
@@ -45,6 +65,7 @@ export const Login = (): ReactElement => {
           <AiOutlineEye className={styles.icon} onClick={showPasswordHandler} />
         )}
       </div>
+      {userNotExist && <p className={styles.warning}>User is not found. Please, sign up</p>}
       <Button buttonText="Log In" type="submit" isButtonEnable={isButtonActive} />
       <span className={styles.message}>
         New here? <Link to="/signup">Register here.</Link>

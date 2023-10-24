@@ -34,3 +34,9 @@
 .message a:hover{
   background-color: var(--light-green-color);
 }
+
+.warning {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--red-color);
+}
