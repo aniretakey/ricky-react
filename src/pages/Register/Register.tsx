@@ -1,18 +1,29 @@
+/* eslint-disable max-lines-per-function */
+/* eslint-disable no-use-before-define */
 import { FormEvent, ReactElement, useEffect, useState } from 'react';
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import styles from './register.module.css';
 import { Link } from 'react-router-dom';
+
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+
+import styles from './register.module.css';
+
 import { TypeValidator } from '../../models/models.ts';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
+import { useActions } from '../../hooks/useActions.ts';
+import { useAppSelector } from '../../hooks/useAppSelector.ts';
 
 export const Register = (): ReactElement => {
+  const { addUser } = useActions();
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [mail, setMail] = useState<string>('');
+  const [existingUser, setExistingUser] = useState<boolean>(false);
 
   const [isButtonActive, setButtonActive] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const existingUsers = useAppSelector((state) => state.auth.users);
 
   useEffect(() => {
     setButtonActive(
@@ -30,11 +41,24 @@ export const Register = (): ReactElement => {
   const passwordValidation: TypeValidator = (value) => value.trim().length > 6;
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
+
+    if (existingUsers.some((user) => user.login === login)) {
+      setExistingUser(true);
+      return;
+    }
+    addUser({ login, password });
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
+    <form
+      onSubmit={handleSubmit}
+      className={styles.form}
+      onChange={():void => {
+        setExistingUser(false);
+      }}
+    >
       <h1>Registration</h1>
+
       <label className={styles.label} htmlFor="Login">
         Login
       </label>
@@ -45,7 +69,7 @@ export const Register = (): ReactElement => {
       </label>
       <Input
         id="Email"
-        placeholder={`Enter email`}
+        placeholder="Enter email"
         text={mail}
         setValue={setMail}
         type="email"
@@ -70,6 +94,7 @@ export const Register = (): ReactElement => {
           <AiOutlineEye className={styles.icon} onClick={showPasswordHandler} />
         )}
       </div>
+      {existingUser && <p className={styles.warning}>This user is already exists</p>}
       <Button buttonText="Sign Up" type="submit" isButtonEnable={!isButtonActive} />
       <span className={styles.message}>
         Already has and account? <Link to="/login">Authorize here.</Link>

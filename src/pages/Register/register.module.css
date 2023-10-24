@@ -5,9 +5,11 @@
   justify-content: center;
   gap: 20px;
 }
-.label{
+
+.label {
   font-size: 1.5em;
 }
+
 .password {
   position: relative;
   display: flex;
@@ -22,6 +24,12 @@
   cursor: pointer;
 }
 
-.message a{
+.message a {
   text-decoration: underline var(--yellow-color) 3px;
+}
+
+.warning {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--red-color);
 }
