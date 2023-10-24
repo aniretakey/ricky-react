@@ -6,10 +6,13 @@ import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import styles from './login.module.css';
 import { useAppSelector } from '../../hooks/useAppSelector.ts';
+import { useActions } from '../../hooks/useActions.ts';
 
 export const Login = (): ReactElement => {
   const navigate = useNavigate();
   const [login, setLogin] = useState<string>('');
+  const { setCurrentUser } = useActions();
+
   const [password, setPassword] = useState<string>('');
   const [userNotExist, setUserNotExist] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -29,6 +32,7 @@ export const Login = (): ReactElement => {
     const userExists = existingUsers.some((user) => user.login === login && user.password === password);
     if (userExists) {
       setUserNotExist(false);
+      setCurrentUser({ login });
       navigate('/');
     } else {
       setUserNotExist(true);

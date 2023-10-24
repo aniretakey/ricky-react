@@ -1,16 +1,18 @@
 import { ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from "../Button";
+import { Button } from '../Button';
+import { useAppSelector } from '../../hooks/useAppSelector.ts';
 
 export function Navigation(): ReactElement {
   const navigate = useNavigate();
-  
+  const currentUser = useAppSelector((state) => state.auth.currentUser);
+
   const handleSignUp = (): void => {
     navigate('/signup');
   };
   const handleLogin = (): void => {
-    navigate('/login')
-  }
+    navigate('/login');
+  };
   return (
     <nav>
       <Button buttonText="Favourite" handleClick={(): void => console.log('click')} />

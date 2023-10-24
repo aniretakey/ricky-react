@@ -15,7 +15,7 @@ import { useAppSelector } from '../../hooks/useAppSelector.ts';
 
 export const Register = (): ReactElement => {
   const navigate = useNavigate();
-  const { addUser } = useActions();
+  const { addUser, setCurrentUser } = useActions();
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [mail, setMail] = useState<string>('');
@@ -48,6 +48,7 @@ export const Register = (): ReactElement => {
       return;
     }
     addUser({ login, password });
+    setCurrentUser({ login });
     navigate('/');
   };
 
