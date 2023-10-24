@@ -45,12 +45,14 @@ export const authSlice = createSlice({
       localStorage.setItem('users', JSON.stringify(state.users));
     },
     setCurrentUser(state, { payload }) {
-      state.currentUser = {
-        ...state.currentUser,
+      const newState = { ...state }; // Создаем копию состояния
+      newState.currentUser = {
+        ...newState.currentUser,
         login: payload.login,
         favourites: payload.favourites,
       };
-      localStorage.setItem('currentUser', JSON.stringify(state.currentUser));
+      localStorage.setItem('currentUser', JSON.stringify(newState.currentUser));
+      return newState;
     },
   },
 });
