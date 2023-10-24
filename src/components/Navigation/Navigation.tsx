@@ -21,11 +21,16 @@ export function Navigation(): ReactElement {
     navigate('/');
   };
 
+  const handleFavourites = (): void => {
+    navigate('/favourites');
+  };
+  
+
   return (
     <nav>
       {currentUser.login ? (
         <>
-          <Button buttonText="Favourites" handleClick={(): void => console.log('click')} />
+          <Button buttonText="Favourites" handleClick={handleFavourites} />
           <Button buttonText="History" handleClick={(): void => navigate('/history')} />
           <Button buttonText="Log out" handleClick={handleLogout} />
         </>

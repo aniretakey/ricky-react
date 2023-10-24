@@ -1,4 +1,4 @@
-import { Slice } from '@reduxjs/toolkit';
+
 
 export type UserType = {
   login: string;
@@ -7,14 +7,6 @@ export type UserType = {
 
 export type CurrentUserType = {
   login: string;
-  favourites?: [];
+  favourites: number[];
 };
 
-export type AuthType = Slice<
-  { users: AuthType[] },
-  {
-    confirm(state: { users: UserType[] }, action: { payload: any; type: string }): void;
-    addUser(state: { users: UserType[] }, action: { payload: UserType }): void;
-  },
-  'auth'
->;

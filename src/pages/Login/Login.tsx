@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { FormEvent, ReactElement, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
@@ -32,7 +33,7 @@ export const Login = (): ReactElement => {
     const userExists = existingUsers.some((user) => user.login === login && user.password === password);
     if (userExists) {
       setUserNotExist(false);
-      setCurrentUser({ login });
+      setCurrentUser({ login});
       navigate('/');
     } else {
       setUserNotExist(true);
