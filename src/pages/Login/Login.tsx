@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import { FormEvent, ReactElement, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
+
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
