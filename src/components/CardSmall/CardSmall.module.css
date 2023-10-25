@@ -28,3 +28,10 @@
   width: 90%;
   border-radius: var(--radius-border);
 }
+.like {
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 2em;
+}
