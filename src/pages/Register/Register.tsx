@@ -42,12 +42,11 @@ export const Register = (): ReactElement => {
   const passwordValidation: TypeValidator = (value) => value.trim().length > 6;
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
-
     if (existingUsers.some((user) => user.login === login)) {
       setExistingUser(true);
       return;
     }
-    addUser({ login, password });
+    addUser({ login, password, favourites: [] });
     setCurrentUser({ login });
     navigate('/');
   };
