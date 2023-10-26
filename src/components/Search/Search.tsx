@@ -13,14 +13,12 @@ import { CharacterType } from '../../models/card.model.ts';
 
 export function Search(): ReactElement {
   const navigate = useNavigate();
-
   const inputRef = useRef<HTMLInputElement | null>(null);
   const { setHistory, setValue } = useActions();
+  const [dropdown, setDropdown] = useState<boolean>(false);
   const { value } = useAppSelector((state) => state.searchValues);
-
   const debounced = useDebounce(value);
-  const [dropdown, setDropdown] = useState(false);
-  const { data } = useGetCharacterByNameQuery(debounced, { skip: debounced.length < 3 });
+  const { data, isError } = useGetCharacterByNameQuery(debounced, { skip: debounced.length < 3 });
 
   useEffect(() => {
     setDropdown(debounced.length >= 3 && data?.results.length! > 0);
@@ -31,13 +29,16 @@ export function Search(): ReactElement {
     inputRef.current?.focus();
   };
   const handleSearch = (name?: string): void => {
+    if (isError)
+      return;
+    if (name)
+      setValue(name)
+
+    navigate(`/search/?name=${name ?? value}`);
     setHistory();
-    if (name) {
-      navigate(`/search/?name=${name}`);
-    } else {
-      navigate(`/search/?name=${value}`);
-    }
+    setDropdown(false);
   };
+
 
   const handleEnter: KeyboardEventHandler = (event): void => {
     if (event.key === 'Enter' && inputRef.current?.value.trim().length !== 0) {
@@ -54,14 +55,18 @@ export function Search(): ReactElement {
 
   return (
     <div className={styles.inputHandler} onKeyDown={handleEnter}>
-      <Input ref={inputRef} placeholder="Search" text={value} setValue={setValue} />
+      <Input ref={inputRef} placeholder="Search" text={value} setValue={setValue} validator={null} />
       {dropdown && (
         <ul className={styles.suggestList}>
-          {data?.results?.map((el: CharacterType) => (
-            <li className={styles.suggestItem} key={el.id} onClick={(): void => handleSearch(el.name)}>
-              {el.name}
-            </li>
-          ))}
+          {isError ? (
+            <li className={styles.suggestItem}>Character is not found</li>
+          ) : (
+            data?.results?.map((el: CharacterType) => (
+              <li className={styles.suggestItem} key={el.id} onClick={(): void => handleSearch(el.name)}>
+                {el.name}
+              </li>
+            ))
+          )}
         </ul>
       )}
       <div className={styles.handlerSearchIcon}>

@@ -4,6 +4,7 @@ import { Welcome } from '../../components/Weclome';
 import { useGetAllCharactersQuery } from '../../store/characters/characters.api.ts';
 import { CardSmall } from '../../components/CardSmall';
 import styles from './home.module.css';
+import { Outlet } from "react-router-dom";
 
 export function Home(): ReactElement {
   const { data } = useGetAllCharactersQuery(null);
@@ -25,6 +26,7 @@ export function Home(): ReactElement {
           />
         ))}
       </div>
+      <Outlet />
     </div>
   );
 }
