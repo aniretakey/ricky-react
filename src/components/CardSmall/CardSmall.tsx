@@ -1,16 +1,15 @@
 /* eslint-disable max-lines-per-function */
 import { ReactElement, useEffect, useState } from 'react';
-
-import styles from './CardSmall.module.css';
+import { useNavigate } from 'react-router-dom';
 
 import { CharacterType } from '../../models/card.model';
 import { Button } from '../Button';
 import { Like } from '../Like';
-import { useNavigate } from "react-router-dom";
+import styles from './CardSmall.module.css';
 
 export const CardSmall = ({ image, name, id }: CharacterType): ReactElement => {
   const [active, setActive] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('currentUser') ?? '[]');
@@ -19,9 +18,9 @@ export const CardSmall = ({ image, name, id }: CharacterType): ReactElement => {
       setActive(true);
     }
   }, [id]);
-  const handleDetailsClick = () => {
-    navigate(`/search/character/${id}`)
-  }
+  const handleDetailsClick = (): void => {
+    navigate(`/search/character/${id}`);
+  };
 
   const toggleLike = (): void => {
     setActive((prev) => !prev);
@@ -37,7 +36,6 @@ export const CardSmall = ({ image, name, id }: CharacterType): ReactElement => {
       unicFavorites?.push(id);
 
       localStorage.setItem('currentUser', JSON.stringify({ ...favouritesForCurrUser, favourites: unicFavorites }));
-      console.log(fav.favourites);
       favouritesFromAllUsers?.push(id);
 
       localStorage.setItem('users', JSON.stringify({ ...favouritesAllUsers, favourites: favouritesFromAllUsers }));
