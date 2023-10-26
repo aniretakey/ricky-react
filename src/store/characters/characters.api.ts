@@ -17,8 +17,8 @@ export const charactersApi = createApi({
       query: (name) => ({
         url: '/character/',
         params: {
-          name
-        }
+          name,
+        },
       }),
     }),
   }),
