@@ -6,31 +6,38 @@ import { Home } from './Home';
 import { SearchPage } from './SearchPage';
 import { History } from './History';
 import { Favourites } from './Favourites';
+import { CardModal } from "../components/CardModal";
+import { createPortal } from "react-dom";
 
 const routes: RouteObject[] = [
   {
     path: '/',
     element: <Home />,
-  },
-  {
-    path: '/signup',
-    element: (
-      <Modal>
-        <Register />
-      </Modal>
-    ),
-  },
-  {
-    path: '/login',
-    element: (
-      <Modal>
-        <Login />
-      </Modal>
-    ),
+    children: [
+      {
+        path: 'signup',
+        element: createPortal((
+          <Modal>
+            <Register />
+          </Modal>
+        ), document.body)
+      },
+      {
+        path: 'login',
+        element: createPortal((
+            <Modal>
+              <Login />
+            </Modal>
+          ), document.body),
+      },
+    ]
   },
   {
     path: '/search',
     element: <SearchPage />,
+    children: [
+      { path: 'character/:id', element: <CardModal /> }
+    ]
   },
   {
     path: '/history',

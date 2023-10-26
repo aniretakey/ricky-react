@@ -41,3 +41,20 @@ a {
 ul {
   list-style: none;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--black-color);
+  border-radius: var(--radius-border);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--dark-green-color);
+  border-radius: var(--radius-border);
+}

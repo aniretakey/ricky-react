@@ -11,7 +11,6 @@ interface ModalProps {
 export function Modal({ onClose, children }: ModalProps): ReactElement {
   const navigate = useNavigate();
   const handleClose = ():void => {
-    
     navigate('/');
   };
 

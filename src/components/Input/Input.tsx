@@ -9,7 +9,8 @@ interface IInputProps {
   setValue: React.Dispatch<React.SetStateAction<string>> | ActionCreatorWithPayload<string, 'searchValues/setValue'>;
   type?: string;
   id?: string;
-  validator?: TypeValidator;
+  validator?: TypeValidator | null;
+  handleBlur?:  React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Input = forwardRef(
@@ -21,7 +22,10 @@ export const Input = forwardRef(
 
     const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
       setValue(event.target.value);
-      setError(validator(event.target.value));
+      if (validator !== null)
+        setError(validator(event.target.value));
+      else
+        setError(true)
     };
 
     return (
