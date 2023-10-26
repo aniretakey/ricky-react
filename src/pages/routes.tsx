@@ -6,6 +6,7 @@ import { Home } from './Home';
 import { SearchPage } from './SearchPage';
 import { History } from './History';
 import { Favourites } from './Favourites';
+import { CardModal } from "../components/CardModal";
 
 const routes: RouteObject[] = [
   {
@@ -31,6 +32,9 @@ const routes: RouteObject[] = [
   {
     path: '/search',
     element: <SearchPage />,
+    children: [
+      { path: 'character/:id', element: <CardModal /> }
+    ]
   },
   {
     path: '/history',

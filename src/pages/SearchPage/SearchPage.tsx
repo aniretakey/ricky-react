@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Search } from '../../components/Search';
 import styles from './SearchPage.module.css';
 import { useGetCharacterByNameQuery } from '../../store/characters/characters.api.ts';
@@ -29,6 +29,7 @@ export function SearchPage(): ReactElement {
           />
         ))}
       </div>
+      <Outlet />
     </div>
   );
 }
