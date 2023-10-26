@@ -1,0 +1,27 @@
+.nav {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 40px;
+    font-size: 1.5rem;
+    gap: 3px;
+    border: 2px solid var(--dark-green-color);
+    border-radius: var(--radius-border) ;
+    padding: 3px 20px;
+}
+
+.userIcon {
+    font-size: 2rem;
+}
+
+.userName {
+    color: var(--dark-green-color)
+}
