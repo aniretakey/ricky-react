@@ -1,25 +1,27 @@
 import { ReactElement, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { useGetCharacterByIdQuery } from "../../store/characters/characters.api.ts";
-import { useNavigate, useParams } from "react-router-dom";
-import { Modal } from "../Modal";
+import { useNavigate, useParams } from 'react-router-dom';
+import { useGetCharacterByIdQuery } from '../../store/characters/characters.api.ts';
+
+import { Modal } from '../Modal';
+import { Loader } from '../Loader';
+
 import styles from './CardModal.module.css';
-import { Loader } from "../Loader";
 
 export const CardModal = (): ReactElement => {
-  const { id } = useParams()
-  const { data, isLoading } = useGetCharacterByIdQuery(Number(id))
-  const navigate = useNavigate()
+  const { id } = useParams();
+  const { data, isLoading } = useGetCharacterByIdQuery(Number(id));
+  const navigate = useNavigate();
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden'
-    return function (){
-      document.body.style.overflow = 'auto'
-    }
+    document.body.style.overflow = 'hidden';
+    return function () {
+      document.body.style.overflow = 'auto';
+    };
   }, []);
 
-  const handleClose = () => {
-    navigate('/search')
+  const handleClose = ():void => {
+    navigate('/search');
   }
   return createPortal(
     <Modal onClose={handleClose}>
@@ -30,11 +32,12 @@ export const CardModal = (): ReactElement => {
         </div>
         <div className={styles.description}>
           <ul>
-            {data?.name && <li>Name: {data.name}</li>}
-            {data?.gender && <li>Gander: {data.gender}</li>}
-            {data?.species && <li>Species: {data.species}</li>}
-            {data?.status && <li>Status: {data.status}</li>}
-            {data?.type && <li>Type: {data.type}</li>}
+            {data?.name && <li><b>Name:</b> {data.name}</li>}
+            {data?.gender && <li><b>Gender:</b> {data.gender}</li>}
+            {data?.species && <li><b>Species:</b> {data.species}</li>}
+            {data?.status && <li><b>Status:</b> {data.status}</li>}
+            {data?.type && <li><b>Type:</b> {data.type}</li>}
+            {data?.location?.name && <li><b>Location:</b> {data.location.name}</li>}
           </ul>
         </div>
       </div>
