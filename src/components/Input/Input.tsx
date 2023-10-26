@@ -24,6 +24,8 @@ export const Input = forwardRef(
       setValue(event.target.value);
       if (validator !== null)
         setError(validator(event.target.value));
+      else
+        setError(true)
     };
 
     return (

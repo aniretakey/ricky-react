@@ -1,15 +1,16 @@
 /* eslint-disable max-lines-per-function */
-import { ImSearch } from 'react-icons/im';
 import { KeyboardEventHandler, MouseEventHandler, ReactElement, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Input } from '../Input';
-
-import styles from './Search.module.css';
 import { useActions } from '../../hooks/useActions.ts';
+import { ImSearch } from 'react-icons/im';
+
+import { useGetCharacterByNameQuery } from '../../store/characters/characters.api.ts';
 import { useAppSelector } from '../../hooks/useAppSelector.ts';
 import { useDebounce } from '../../hooks/debounce.ts';
-import { useGetCharacterByNameQuery } from '../../store/characters/characters.api.ts';
+import { Input } from '../Input';
 import { CharacterType } from '../../models/card.model.ts';
+
+import styles from './Search.module.css';
 
 export function Search(): ReactElement {
   const navigate = useNavigate();
@@ -33,12 +34,11 @@ export function Search(): ReactElement {
       return;
     if (name)
       setValue(name)
-
     navigate(`/search/?name=${name ?? value}`);
     setHistory();
-    setDropdown(false);
+    setValue('')
+    focus()
   };
-
 
   const handleEnter: KeyboardEventHandler = (event): void => {
     if (event.key === 'Enter' && inputRef.current?.value.trim().length !== 0) {
@@ -48,6 +48,7 @@ export function Search(): ReactElement {
 
   const handleClick: MouseEventHandler = (): void => {
     focus();
+    // setDropdown(debounced.length >= 3 && data?.results.length! > 0);
     if (inputRef.current?.value.trim().length !== 0) {
       handleSearch();
     }
