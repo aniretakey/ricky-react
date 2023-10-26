@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { ReactElement, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -25,8 +26,11 @@ export const CardModal = (): ReactElement => {
   }
   return createPortal(
     <Modal onClose={handleClose}>
-      {isLoading && <Loader />}
-      <div className={styles.cardOpen}>
+      {isLoading
+       ? 
+       (<div className={styles.loader}><Loader /></div>)
+      : 
+      ( <div className={styles.cardOpen}>
         <div className={styles.imageOpen}>
           <img src={data?.image} alt={data?.name} />
         </div>
@@ -40,7 +44,8 @@ export const CardModal = (): ReactElement => {
             {data?.location?.name && <li><b>Location:</b> {data.location.name}</li>}
           </ul>
         </div>
-      </div>
+      </div>)}
+     
     </Modal>,
     document.body,
   );
