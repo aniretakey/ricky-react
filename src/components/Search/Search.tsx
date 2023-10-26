@@ -30,9 +30,13 @@ export function Search(): ReactElement {
   const focus = (): void => {
     inputRef.current?.focus();
   };
-  const handleSearch = (): void => {
+  const handleSearch = (name?: string): void => {
     setHistory();
-    navigate(`/search/?name=${value}`);
+    if (name) {
+      navigate(`/search/?name=${name}`);
+    } else {
+      navigate(`/search/?name=${value}`);
+    }
   };
 
   const handleEnter: KeyboardEventHandler = (event): void => {
@@ -54,7 +58,7 @@ export function Search(): ReactElement {
       {dropdown && (
         <ul className={styles.suggestList}>
           {data?.results?.map((el: CharacterType) => (
-            <li className={styles.suggestItem} key={el.id}>
+            <li className={styles.suggestItem} key={el.id} onClick={(): void => handleSearch(el.name)}>
               {el.name}
             </li>
           ))}
