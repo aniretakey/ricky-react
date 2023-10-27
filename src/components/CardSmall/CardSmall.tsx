@@ -37,25 +37,6 @@ export const CardSmall = ({ image, name, id }: CharacterType): ReactElement => {
     } else {
       navigate('/login')
     }
-
-    // const favouritesAllUsers = JSON.parse(localStorage.getItem('users') ?? '[]');
-    // const fav = JSON.parse(localStorage.getItem('users')!)[0];
-    // const favouritesFromAllUsers = fav.favourites;
-    //
-    // const favouritesForCurrUser = JSON.parse(localStorage.getItem('currentUser') ?? '[]');
-    // const { favourites } = favouritesForCurrUser;
-    // const unicFavorites = [...new Set(favourites)];
-    // if (!active) {
-    //   unicFavorites?.push(id);
-    //
-    //   localStorage.setItem('currentUser', JSON.stringify({ ...favouritesForCurrUser, favourites: unicFavorites }));
-    //   favouritesFromAllUsers?.push(id);
-    //
-    //   localStorage.setItem('users', JSON.stringify({ ...favouritesAllUsers, favourites: favouritesFromAllUsers }));
-    // } else {
-    //   const filteredFavourites = unicFavorites.filter((favId) => favId !== id);
-    //   localStorage.setItem('currentUser', JSON.stringify({ ...favouritesForCurrUser, favourites: filteredFavourites }));
-    // }
   };
 
   return (
