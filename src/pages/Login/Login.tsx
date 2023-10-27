@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { FormEvent, ReactElement, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useAppSelector.ts';

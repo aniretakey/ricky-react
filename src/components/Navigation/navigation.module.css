@@ -25,3 +25,16 @@
 .userName {
     color: var(--dark-green-color)
 }
+@media (max-width: 768px) { 
+    .nav{
+     gap:1px;
+    }
+    .user{
+        margin-left: 0px;
+    }
+    .user {
+        font-size: 14px;
+        width: max-content ;
+        padding: 0 20px;
+    }
+}
