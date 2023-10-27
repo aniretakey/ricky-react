@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { KeyboardEventHandler, MouseEventHandler, ReactElement, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useActions } from '../../hooks/useActions.ts';

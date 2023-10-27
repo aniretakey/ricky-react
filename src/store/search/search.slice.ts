@@ -12,9 +12,12 @@ export const searchSlice = createSlice({
     setHistory(state) {
       state.history.push(state.value);
     },
-    setValue(state, action: PayloadAction<string>) {
+    setHistoryFromDetails(state, {payload}: PayloadAction<string>) {
+      state.history.push(payload);
+    },
+    setValue(state, {payload}: PayloadAction<string>) {
       // eslint-disable-next-line no-param-reassign
-      state.value = action.payload;
+      state.value = payload;
     },
   },
 });

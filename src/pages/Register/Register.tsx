@@ -1,5 +1,3 @@
-/* eslint-disable max-lines-per-function */
-/* eslint-disable no-use-before-define */
 import { FormEvent, ReactElement, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 

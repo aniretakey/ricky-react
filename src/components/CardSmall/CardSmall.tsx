@@ -1,18 +1,17 @@
-/* eslint-disable max-lines-per-function */
 import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { CharacterType } from '../../models/card.model';
 import { Button } from '../Button';
 import { Like } from '../Like';
-import { useActions } from "../../hooks/useActions.ts";
-import { useAppSelector } from "../../hooks/useAppSelector.ts";
+import { useActions } from '../../hooks/useActions.ts';
+import { useAppSelector } from '../../hooks/useAppSelector.ts';
 import styles from './CardSmall.module.css';
 
 export const CardSmall = ({ image, name, id }: CharacterType): ReactElement => {
   const [active, setActive] = useState(false);
-  const { toggleFavouritesForUser } = useActions()
-  const { currentUser } = useAppSelector(state => state.auth)
+  const { toggleFavouritesForUser, setHistoryFromDetails } = useActions();
+  const { currentUser } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,21 +20,22 @@ export const CardSmall = ({ image, name, id }: CharacterType): ReactElement => {
         setActive(true);
       }
     } else {
-      setActive(false)
+      setActive(false);
     }
   }, [currentUser.login]);
+
+  
   const handleDetailsClick = (): void => {
+    setHistoryFromDetails(name!);
     navigate(`/search/character/${id}`);
   };
 
   const toggleLike = (): void => {
     if (currentUser?.login && currentUser.password) {
       setActive((prev) => !prev);
-      toggleFavouritesForUser({ id })
-
-
+      toggleFavouritesForUser({ id });
     } else {
-      navigate('/login')
+      navigate('/login');
     }
   };
 

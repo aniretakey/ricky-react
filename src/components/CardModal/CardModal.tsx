@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { ReactElement, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate, useParams } from 'react-router-dom';

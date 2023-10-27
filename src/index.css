@@ -20,7 +20,6 @@
 
 body {
   font-family: 'Autour One', cursive;
-  background: var(--black-color);
   color: var(--dark-green-color);
   background: var(--black-color);
   background-size: contain;
@@ -58,3 +57,4 @@ ul {
   background: var(--dark-green-color);
   border-radius: var(--radius-border);
 }
+ 
