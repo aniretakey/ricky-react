@@ -1,34 +1,39 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CurrentUserType, UserType } from './auth.model.ts';
+import { UserType } from './auth.model.ts';
+
+export enum HARDCODE {
+  CURRENT_USER = 'currentUser',
+  ALL_USERS = 'users'
+}
 
 // Get users array from LS
-const savedUsers = localStorage.getItem('users');
-let parsedUsers: UserType[] = [];
-if (savedUsers) {
-  try {
-    parsedUsers = JSON.parse(savedUsers);
-  } catch (error) {
-    console.error('Ошибка при разборе данных из localStorage', error);
-  }
-}
+// const savedUsers = localStorage.getItem('users');
+// let parsedUsers: UserType[] = [];
+// if (savedUsers) {
+//   try {
+//     parsedUsers = JSON.parse(savedUsers);
+//   } catch (error) {
+//     console.error('Ошибка при разборе данных из localStorage', error);
+//   }
+// }
 
 // Get current user from LS
-const currUser = localStorage.getItem('currentUser');
-let parsedCurrentUser: CurrentUserType = {
-  login: '',
-  favourites: [],
-};
-if (currUser) {
-  try {
-    parsedCurrentUser = JSON.parse(currUser);
-  } catch (error) {
-    console.error('Ошибка при разборе данных из localStorage', error);
-  }
-}
+// const currUser = localStorage.getItem('currentUser');
+// let parsedCurrentUser: CurrentUserType = {
+//   login: '',
+//   favourites: [],
+// };
+// if (currUser) {
+//   try {
+//     parsedCurrentUser = JSON.parse(currUser);
+//   } catch (error) {
+//     console.error('Ошибка при разборе данных из localStorage', error);
+//   }
+// }
 
 const initialState = {
-  users: parsedUsers,
-  currentUser: parsedCurrentUser,
+  users: JSON.parse(localStorage.getItem(HARDCODE.ALL_USERS) ?? '[]') as UserType[],
+  currentUser: JSON.parse(localStorage.getItem(HARDCODE.CURRENT_USER) ?? '{}') as UserType,
 };
 
 export const authSlice = createSlice({
@@ -44,23 +49,42 @@ export const authSlice = createSlice({
       state.users.push(payload);
       localStorage.setItem('users', JSON.stringify(state.users));
     },
-    setCurrentUser(state, { payload }) {
-      const newState = { ...state }; // Создаем копию состояния
-      newState.currentUser = {
-        ...newState.currentUser,
-        login: payload.login,
-      };
-      localStorage.setItem('currentUser', JSON.stringify(newState.currentUser));
-      return newState;
+    setCurrentUser(state, { payload }){
+      const [neededUser] = state.users.filter( user => user.login === payload.login && user.password === payload.password )
+      state.currentUser = neededUser
+      localStorage.setItem(HARDCODE.CURRENT_USER, JSON.stringify(state.currentUser))
+    },
+    setNewCurrentUser(state, { payload }) {
+      state.currentUser = { ...payload, favourites: [] }
+      localStorage.setItem(HARDCODE.CURRENT_USER, JSON.stringify(state.currentUser))
+
+      // const newState = { ...state }; // Создаем копию состояния
+      // newState.currentUser = {
+      //   ...newState.currentUser,
+      //   login: payload.login,
+      // };
+      // localStorage.setItem('currentUser', JSON.stringify(newState.currentUser));
+      // return newState;
+    },
+    logoutUser(state){
+      state.currentUser = {login: '', password: '', favourites: []}
+      localStorage.setItem(HARDCODE.CURRENT_USER, JSON.stringify(state.currentUser))
     },
     addFavouritesForUser(state, { payload }) {
-      const newState = { ...state }; // Создаем копию состояния
-      newState.currentUser = {
-        ...newState.currentUser,
-        favourites: [...state.currentUser.favourites, payload],
-      };
-      localStorage.setItem('currentUser', JSON.stringify(newState.currentUser));
-      return newState;
+      state.currentUser.favourites.push(payload.id)
+      state.users = state.users.filter( user => user.login !== payload.login && user.password !== payload.password)
+      state.users.push(state.currentUser)
+
+      localStorage.setItem(HARDCODE.CURRENT_USER, JSON.stringify(state.currentUser))
+      localStorage.setItem(HARDCODE.ALL_USERS, JSON.stringify(state.users))
+
+      // const newState = { ...state }; // Создаем копию состояния
+      // newState.currentUser = {
+      //   ...newState.currentUser,
+      //   favourites: [...state.currentUser.favourites, payload],
+      // };
+      // localStorage.setItem('currentUser', JSON.stringify(newState.currentUser));
+      // return newState;
     },
     removeFavouritesForUser(state, { payload }) {
       const updatedFavourites = state.currentUser.favourites.filter((item) => item !== payload);
@@ -75,6 +99,7 @@ export const authSlice = createSlice({
       localStorage.setItem('currentUser', JSON.stringify(newState.currentUser));
       return newState;
     },
+
   },
 });
 

@@ -6,8 +6,8 @@ export type UserType = {
   favourites: number[];
 };
 
-export type CurrentUserType = {
-  login: string;
-  favourites: number[];
-};
+// export type CurrentUserType = {
+//   login: string;
+//   favourites: number[];
+// };
 
