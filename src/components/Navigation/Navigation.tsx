@@ -10,7 +10,7 @@ import styles from './navigation.module.css';
 export function Navigation(): ReactElement {
   const navigate = useNavigate();
   const currentUser = useAppSelector((state) => state.auth.currentUser);
-  const { setCurrentUser } = useActions();
+  const { logoutUser } = useActions();
 
   const handleSignUp = (): void => {
     navigate('/signup');
@@ -20,7 +20,7 @@ export function Navigation(): ReactElement {
   };
 
   const handleLogout = (): void => {
-    setCurrentUser('');
+    logoutUser();
     navigate('/');
   };
 

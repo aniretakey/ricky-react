@@ -14,16 +14,15 @@ import { useActions } from '../../hooks/useActions.ts';
 import { useAppSelector } from '../../hooks/useAppSelector.ts';
 
 export const Register = (): ReactElement => {
-  const navigate = useNavigate();
-  const { addUser, setCurrentUser } = useActions();
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [mail, setMail] = useState<string>('');
   const [existingUser, setExistingUser] = useState<boolean>(false);
-
   const [isButtonActive, setButtonActive] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
+  const navigate = useNavigate();
+  const { addUser, setNewCurrentUser } = useActions();
   const existingUsers = useAppSelector((state) => state.auth.users);
 
   useEffect(() => {
@@ -47,7 +46,7 @@ export const Register = (): ReactElement => {
       return;
     }
     addUser({ login, password, favourites: [] });
-    setCurrentUser({ login });
+    setNewCurrentUser({ login, password, favourites: [] });
     navigate('/');
   };
 

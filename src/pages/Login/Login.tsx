@@ -1,18 +1,17 @@
 /* eslint-disable max-lines-per-function */
 import { FormEvent, ReactElement, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { useAppSelector } from '../../hooks/useAppSelector.ts';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import styles from './login.module.css';
-import { useAppSelector } from '../../hooks/useAppSelector.ts';
-import { useActions } from '../../hooks/useActions.ts';
+import { useActions } from "../../hooks/useActions.ts";
 
 export const Login = (): ReactElement => {
   const navigate = useNavigate();
   const [login, setLogin] = useState<string>('');
-  const { setCurrentUser } = useActions();
 
   const [password, setPassword] = useState<string>('');
   const [userNotExist, setUserNotExist] = useState<boolean>(false);
@@ -20,6 +19,7 @@ export const Login = (): ReactElement => {
   const [isButtonActive, setIsButtonActive] = useState<boolean>(false);
 
   const existingUsers = useAppSelector((state) => state.auth.users);
+  const { setCurrentUser } = useActions()
 
   useEffect(() => {
     setIsButtonActive(![login.trim().length > 0, password.trim().length > 6].every((item) => item));
@@ -32,8 +32,8 @@ export const Login = (): ReactElement => {
     e.preventDefault();
     const userExists = existingUsers.some((user) => user.login === login && user.password === password);
     if (userExists) {
+      setCurrentUser({login, password})
       setUserNotExist(false);
-      setCurrentUser({ login});
       navigate('/');
     } else {
       setUserNotExist(true);

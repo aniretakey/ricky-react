@@ -1,80 +1,49 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { CurrentUserType, UserType } from './auth.model.ts';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { UserType } from './auth.model.ts';
 
-// Get users array from LS
-const savedUsers = localStorage.getItem('users');
-let parsedUsers: UserType[] = [];
-if (savedUsers) {
-  try {
-    parsedUsers = JSON.parse(savedUsers);
-  } catch (error) {
-    console.error('Ошибка при разборе данных из localStorage', error);
-  }
-}
-
-// Get current user from LS
-const currUser = localStorage.getItem('currentUser');
-let parsedCurrentUser: CurrentUserType = {
-  login: '',
-  favourites: [],
-};
-if (currUser) {
-  try {
-    parsedCurrentUser = JSON.parse(currUser);
-  } catch (error) {
-    console.error('Ошибка при разборе данных из localStorage', error);
-  }
+export enum AUTH {
+  CURRENT_USER = 'currentUser',
+  ALL_USERS = 'users'
 }
 
 const initialState = {
-  users: parsedUsers,
-  currentUser: parsedCurrentUser,
+  users: JSON.parse(localStorage.getItem(AUTH.ALL_USERS) ?? '[]') as UserType[],
+  currentUser: JSON.parse(localStorage.getItem(AUTH.CURRENT_USER) ?? '{}') as UserType,
 };
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    confirm(state, action) {
-      console.log('confirm');
-      console.log(state);
-      console.log(action);
-    },
-    addUser(state, { payload }) {
+    addUser(state, { payload }: PayloadAction<UserType>) {
       state.users.push(payload);
-      localStorage.setItem('users', JSON.stringify(state.users));
+      localStorage.setItem(AUTH.ALL_USERS, JSON.stringify(state.users));
     },
-    setCurrentUser(state, { payload }) {
-      const newState = { ...state }; // Создаем копию состояния
-      newState.currentUser = {
-        ...newState.currentUser,
-        login: payload.login,
-      };
-      localStorage.setItem('currentUser', JSON.stringify(newState.currentUser));
-      return newState;
+    setCurrentUser(state, { payload }: PayloadAction<Omit<UserType, 'favourites'>>){
+      const [neededUser] = state.users.filter( user => user.login === payload.login && user.password === payload.password )
+      state.currentUser = neededUser
+      localStorage.setItem(AUTH.CURRENT_USER, JSON.stringify(state.currentUser))
     },
-    addFavouritesForUser(state, { payload }) {
-      const newState = { ...state }; // Создаем копию состояния
-      newState.currentUser = {
-        ...newState.currentUser,
-        favourites: [...state.currentUser.favourites, payload],
-      };
-      localStorage.setItem('currentUser', JSON.stringify(newState.currentUser));
-      return newState;
+    setNewCurrentUser(state, { payload }: PayloadAction<UserType>) {
+      state.currentUser = { ...payload }
+      localStorage.setItem(AUTH.CURRENT_USER, JSON.stringify(state.currentUser))
     },
-    removeFavouritesForUser(state, { payload }) {
-      const updatedFavourites = state.currentUser.favourites.filter((item) => item !== payload);
+    logoutUser(state){
+      state.currentUser = {login: '', password: '', favourites: []}
+      localStorage.setItem(AUTH.CURRENT_USER, JSON.stringify(state.currentUser))
+    },
+    toggleFavouritesForUser(state, { payload }: PayloadAction<{id: number}>){
+      if (state.currentUser.favourites.includes(payload.id))
+        state.currentUser.favourites = state.currentUser.favourites.filter(id => id !== payload.id)
+      else
+        state.currentUser.favourites.push(payload.id)
 
-      const newState = {
-        ...state,
-        currentUser: {
-          ...state.currentUser,
-          favourites: updatedFavourites,
-        },
-      };
-      localStorage.setItem('currentUser', JSON.stringify(newState.currentUser));
-      return newState;
-    },
+      // TODO: доделать логкиу, чтобы пользователь не перезаписывался
+      state.users = state.users.filter( user => user.login !== state.currentUser.login && user.password !== state.currentUser.password)
+      state.users.push(state.currentUser)
+      localStorage.setItem(AUTH.ALL_USERS, JSON.stringify(state.users))
+      localStorage.setItem(AUTH.CURRENT_USER, JSON.stringify(state.currentUser))
+    }
   },
 });
 

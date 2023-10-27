@@ -5,43 +5,37 @@ import { useNavigate } from 'react-router-dom';
 import { CharacterType } from '../../models/card.model';
 import { Button } from '../Button';
 import { Like } from '../Like';
+import { useActions } from "../../hooks/useActions.ts";
+import { useAppSelector } from "../../hooks/useAppSelector.ts";
 import styles from './CardSmall.module.css';
 
 export const CardSmall = ({ image, name, id }: CharacterType): ReactElement => {
   const [active, setActive] = useState(false);
+  const { toggleFavouritesForUser } = useActions()
+  const { currentUser } = useAppSelector(state => state.auth)
   const navigate = useNavigate();
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('currentUser') ?? '[]');
-    const { favourites } = data;
-    if (favourites?.includes(id)) {
-      setActive(true);
+    if (currentUser.login) {
+      if (currentUser.favourites?.includes(id)) {
+        setActive(true);
+      }
+    } else {
+      setActive(false)
     }
-  }, [id]);
+  }, [currentUser.login]);
   const handleDetailsClick = (): void => {
     navigate(`/search/character/${id}`);
   };
 
   const toggleLike = (): void => {
-    setActive((prev) => !prev);
+    if (currentUser?.login && currentUser.password) {
+      setActive((prev) => !prev);
+      toggleFavouritesForUser({ id })
 
-    const favouritesAllUsers = JSON.parse(localStorage.getItem('users') ?? '[]');
-    const fav = JSON.parse(localStorage.getItem('users')!)[0];
-    const favouritesFromAllUsers = fav.favourites;
 
-    const favouritesForCurrUser = JSON.parse(localStorage.getItem('currentUser') ?? '[]');
-    const { favourites } = favouritesForCurrUser;
-    const unicFavorites = [...new Set(favourites)];
-    if (!active) {
-      unicFavorites?.push(id);
-
-      localStorage.setItem('currentUser', JSON.stringify({ ...favouritesForCurrUser, favourites: unicFavorites }));
-      favouritesFromAllUsers?.push(id);
-
-      localStorage.setItem('users', JSON.stringify({ ...favouritesAllUsers, favourites: favouritesFromAllUsers }));
     } else {
-      const filteredFavourites = unicFavorites.filter((favId) => favId !== id);
-      localStorage.setItem('currentUser', JSON.stringify({ ...favouritesForCurrUser, favourites: filteredFavourites }));
+      navigate('/login')
     }
   };
 
