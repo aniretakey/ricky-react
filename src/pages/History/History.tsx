@@ -1,10 +1,17 @@
-import { ReactElement } from 'react';
-import { Link } from 'react-router-dom';
+import { ReactElement, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import styles from './history.module.css';
 
 export const History = (): ReactElement => {
   const { history } = useAppSelector((state) => state.searchValues);
+  const currentUser = useAppSelector((state) => state.auth.currentUser);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (currentUser.login === '') {
+      navigate('/login');
+    }
+  }, []);
 
   return (
     <div className={styles.history}>
