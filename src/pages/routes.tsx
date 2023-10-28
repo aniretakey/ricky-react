@@ -1,4 +1,4 @@
-import { RouteObject } from 'react-router-dom';
+import { RouteObject, useNavigate } from 'react-router-dom';
 import { Modal } from '../components/Modal';
 import { Login } from './Login';
 import { Register } from './Register';
@@ -8,6 +8,9 @@ import { History } from './History';
 import { Favourites } from './Favourites';
 import { CardModal } from "../components/CardModal";
 import { createPortal } from "react-dom";
+import { useAppSelector } from '../hooks/useAppSelector';
+
+
 
 const routes: RouteObject[] = [
   {
@@ -48,5 +51,6 @@ const routes: RouteObject[] = [
     element: <Favourites />,
   },
 ];
+
 
 export default routes;
