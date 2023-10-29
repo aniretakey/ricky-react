@@ -38,9 +38,10 @@ export const authSlice = createSlice({
       else
         state.currentUser.favourites.push(payload.id)
 
-      // TODO: доделать логкиу, чтобы пользователь не перезаписывался
-      state.users = state.users.filter( user => user.login !== state.currentUser.login && user.password !== state.currentUser.password)
-      state.users.push(state.currentUser)
+      state.users.map( user => {
+        if (user.login === state.currentUser.login && user.password === state.currentUser.password)
+          user.favourites = state.currentUser.favourites
+      })
       localStorage.setItem(AUTH.ALL_USERS, JSON.stringify(state.users))
       localStorage.setItem(AUTH.CURRENT_USER, JSON.stringify(state.currentUser))
     }

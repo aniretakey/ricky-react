@@ -5,7 +5,7 @@ import { ImSearch } from 'react-icons/im';
 
 import { useGetCharacterByNameQuery } from '../../store/characters/characters.api.ts';
 import { useAppSelector } from '../../hooks/useAppSelector.ts';
-import { useDebounce } from '../../hooks/debounce.ts';
+import { useDebounce } from '../../hooks/useDebounce.ts';
 import { Input } from '../Input';
 import { CharacterType } from '../../models/card.model.ts';
 
