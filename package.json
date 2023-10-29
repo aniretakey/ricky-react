@@ -12,7 +12,7 @@
     "preview": "vite preview",
     "precommit": "lint-staged && commitlint -E HUSKY_GIT_PARAMS",
     "prepare": "husky install",
-    "deploy": "tsc && vite build && gh-pages -d dist"
+    "deploy": "tsc && vite build && npx gh-pages -d dist"
   },
   "lint-staged": {
     "*.js": [
