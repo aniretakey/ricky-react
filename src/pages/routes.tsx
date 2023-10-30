@@ -1,4 +1,5 @@
 import { RouteObject } from 'react-router-dom';
+import { createPortal } from 'react-dom';
 import { Modal } from '../components/Modal';
 import { Login } from './Login';
 import { Register } from './Register';
@@ -7,7 +8,7 @@ import { SearchPage } from './SearchPage';
 import { History } from './History';
 import { Favourites } from './Favourites';
 import { CardModal } from '../components/CardModal';
-import { createPortal } from 'react-dom';
+import { Error } from './Error';
 
 const routes: RouteObject[] = [
   {
@@ -46,6 +47,10 @@ const routes: RouteObject[] = [
   {
     path: '/favourites',
     element: <Favourites />,
+  },
+  {
+    path: '*',
+    element: <Error />,
   },
 ];
 
