@@ -1,6 +1,8 @@
 import { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
+
 import { Navigation } from "../Navigation";
+
 import styles from './header.module.css';
 
 export function Header(): ReactElement {

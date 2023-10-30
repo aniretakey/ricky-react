@@ -1,11 +1,15 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Img } from "react-image";
 
-import { CharacterType } from '../../models/card.model';
-import { Button } from '../Button';
-import { Like } from '../Like';
 import { useActions } from '../../hooks/useActions.ts';
 import { useAppSelector } from '../../hooks/useAppSelector.ts';
+
+import { Button } from '../Button';
+import { Like } from '../Like';
+import { Loader } from "../Loader";
+import { CharacterType } from '../../models/card.model';
+
 import styles from './CardSmall.module.css';
 
 export const CardSmall = ({ image, name, id }: CharacterType): ReactElement => {
@@ -46,7 +50,13 @@ export const CardSmall = ({ image, name, id }: CharacterType): ReactElement => {
       </div>
       <h3 className={styles.title}>{name}</h3>
       <div className={styles.image}>
-        <img src={image} alt={name} />
+        <Img
+          src={image}
+          loader={<Loader />}
+          unloader={<Loader />}
+          loading='lazy'
+          alt={name}
+        />
       </div>
       <Button buttonText="Details" handleClick={handleDetailsClick} />
     </div>

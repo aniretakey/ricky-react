@@ -2,9 +2,10 @@ import { ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BiSolidUserCircle } from 'react-icons/bi';
 
-import { Button } from '../Button';
 import { useAppSelector } from '../../hooks/useAppSelector.ts';
+import { Button } from '../Button';
 import { useActions } from '../../hooks/useActions.ts';
+
 import styles from './navigation.module.css';
 
 export function Navigation(): ReactElement {

@@ -1,15 +1,18 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+
 import { Search } from '../../components/Search';
 import { Welcome } from '../../components/Welcome';
-import { useLazyGetCharacterByPageQuery } from '../../store/characters/characters.api.ts';
 import { CardSmall } from '../../components/CardSmall';
-import styles from './home.module.css';
+
+import { useLazyGetCharacterByPageQuery } from '../../store/characters/characters.api.ts';
 import { CharacterType } from '../../models/card.model.ts';
+
+import styles from './home.module.css';
 
 export function Home(): ReactElement {
   const [fetchForPage] = useLazyGetCharacterByPageQuery();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
   const [allCards, setAllCards] = useState<CharacterType[]>([]);
 
   async function fetchData(pageNumber: number): Promise<void> {
@@ -18,8 +21,7 @@ export function Home(): ReactElement {
 
     setAllCards((prev) => {
       if (newData?.results) {
-        const updatedAllCards = [...prev, ...newData.results];
-        return updatedAllCards;
+        return [...prev, ...newData.results];
       }
       return prev;
     });

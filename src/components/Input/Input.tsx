@@ -1,7 +1,9 @@
 import React, { ChangeEvent, ReactElement, Ref, forwardRef, useState } from 'react';
-import styles from './Input.module.css';
-import { TypeValidator } from '../../models/models';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+
+import { TypeValidator } from '../../models/models';
+
+import styles from './Input.module.css';
 
 interface IInputProps {
   placeholder: string;

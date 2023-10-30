@@ -1,15 +1,14 @@
 import { FormEvent, ReactElement, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
-import styles from './register.module.css';
-
-import { TypeValidator } from '../../models/models.ts';
+import { useAppSelector } from '../../hooks/useAppSelector.ts';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { useActions } from '../../hooks/useActions.ts';
-import { useAppSelector } from '../../hooks/useAppSelector.ts';
+import { TypeValidator } from '../../models/models.ts';
+
+import styles from './register.module.css';
 
 export const Register = (): ReactElement => {
   const [login, setLogin] = useState<string>('');

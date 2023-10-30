@@ -1,9 +1,12 @@
 import { ReactElement, useEffect } from 'react';
-import styles from './favourites.module.css';
+import { useNavigate } from 'react-router-dom';
+
+import { CardSmall } from '../../components/CardSmall';
+
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useGetCharacterByIdQuery } from '../../store/characters/characters.api';
-import { CardSmall } from '../../components/CardSmall';
-import { useNavigate } from 'react-router-dom';
+
+import styles from './favourites.module.css';
 
 export const Favourites = (): ReactElement => {
   const favourites = useAppSelector((state) => state.auth.currentUser.favourites);
