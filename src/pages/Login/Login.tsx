@@ -1,7 +1,7 @@
 import { FormEvent, ReactElement, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/useAppSelector.ts';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { useAppSelector } from '../../hooks/useAppSelector.ts';
 
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
