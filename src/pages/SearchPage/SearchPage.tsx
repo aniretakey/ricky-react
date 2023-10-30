@@ -43,12 +43,13 @@ export function SearchPage(): ReactElement {
   }
 
   useEffect(() => {
+    setCards([])
     fetchData(name??'', page)
     window.addEventListener('scroll', checkPosition)
     return () => {
       window.removeEventListener('scroll', checkPosition)
     }
-  }, []);
+  }, [name]);
 
   return (
     <div className={styles.wrapper}>
