@@ -1,13 +1,13 @@
 import { ReactElement, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetCharacterByIdQuery } from '../../store/characters/characters.api.ts';
+import { Img } from "react-image";
 
+import { useGetCharacterByIdQuery } from '../../store/characters/characters.api.ts';
 import { Modal } from '../Modal';
 import { Loader } from '../Loader';
 
 import styles from './CardModal.module.css';
-import { Img } from "react-image";
 
 export const CardModal = (): ReactElement => {
   const { id } = useParams();

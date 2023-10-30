@@ -1,14 +1,16 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Img } from "react-image";
 
-import { CharacterType } from '../../models/card.model';
-import { Button } from '../Button';
-import { Like } from '../Like';
 import { useActions } from '../../hooks/useActions.ts';
 import { useAppSelector } from '../../hooks/useAppSelector.ts';
-import styles from './CardSmall.module.css';
-import { Img } from "react-image";
+
+import { Button } from '../Button';
+import { Like } from '../Like';
 import { Loader } from "../Loader";
+import { CharacterType } from '../../models/card.model';
+
+import styles from './CardSmall.module.css';
 
 export const CardSmall = ({ image, name, id }: CharacterType): ReactElement => {
   const [active, setActive] = useState(false);
