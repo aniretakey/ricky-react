@@ -36,9 +36,8 @@ export function SearchPage(): ReactElement {
     const threshold = height - scrolled - screenHeight;
     if (threshold < 10) {
       setPage((prevPage) => {
-        const nextPage = prevPage + 1;
-        fetchData(name ?? '', page);
-        return nextPage;
+        fetchData(name ?? '', prevPage + 1);
+        return prevPage + 1;
       });
     }
   }
