@@ -1,0 +1,29 @@
+.welcome {
+  margin-top: 50px;
+  text-align: center;
+  padding: 20px;
+  background: var(--dark-green-color);
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  border-radius: var(--radius-border);
+  box-shadow: 45px 45px 30px rgb(0, 0, 0),
+    -10px -10px 30px rgb(112, 208, 38);
+  color: var(--black-color);
+  border: 10px solid var(--light-green-color);
+}
+
+.welcome_title {
+  max-width: max-content;
+  padding: 10px 20px;
+  margin: 0 auto;
+  font-size: 2em;
+  background: var(--light-green-color);
+  border-radius: var(--radius-border);
+}
+
+.welcome_text {
+  margin: 0 auto;
+  max-width: 1000px;
+}
+

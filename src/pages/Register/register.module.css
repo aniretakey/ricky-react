@@ -1,0 +1,35 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.label {
+  font-size: 1.5em;
+}
+
+.password {
+  position: relative;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.icon {
+  font-size: 1.5em;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+.message a {
+  text-decoration: underline var(--yellow-color) 3px;
+}
+
+.warning {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--red-color);
+}

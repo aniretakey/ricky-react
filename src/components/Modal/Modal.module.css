@@ -1,0 +1,40 @@
+.modalBackground {
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.content {
+  position: relative;
+  background-color: var(--dark-green-color);
+  color: var(--black-color);
+  min-width: 50%;
+  min-height: 50%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 0.5em solid var(--light-green-color);
+  border-radius: 1em;
+}
+
+.closeIcon {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  cursor: pointer;
+  transition: 0.4s ease-in-out;
+}
+
+.closeIcon:hover {
+  transform: rotate(-90deg);
+}

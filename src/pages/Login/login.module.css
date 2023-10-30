@@ -1,0 +1,42 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.label{
+  font-size: 1.5em;
+}
+.password {
+  position: relative;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.icon {
+  font-size: 1.5em;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+.message a{
+  background-color: var(--dark-green-color);
+  border: .25em var(--light-green-color) solid;
+  border-radius: var(--radius-border);
+  padding: .2em .5em;
+
+  transition: 400ms;
+}
+
+.message a:hover{
+  background-color: var(--light-green-color);
+}
+
+.warning {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--red-color);
+}

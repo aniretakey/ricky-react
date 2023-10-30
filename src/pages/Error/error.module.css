@@ -1,0 +1,33 @@
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorImage {
+  background: url('https://staticdelivery.nexusmods.com/mods/1151/images/528-0-1447526230.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 520px;
+  height: 500px;
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out;
+  position: relative;
+
+}
+
+.linkToHome {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.errorText {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.errorImage:hover {
+  transform: scale(110%);
+}

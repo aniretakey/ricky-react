@@ -1,0 +1,21 @@
+.loader {
+  background: url('../../assets/icons/portal_icon.png') no-repeat;
+  background-size: contain;
+  width: 150px;
+  height: 150px;
+  animation: loaderAnimation 2s infinite;
+}
+
+@keyframes loaderAnimation {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.2) rotate(180deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}

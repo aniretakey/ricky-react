@@ -1,0 +1,23 @@
+.favourites {
+  background: var(--black-color);
+  border-radius: var(--radius-border);
+  padding: 20px;
+  margin: 0 auto;
+  width: 1000px;
+  color: var(--dark-green-color);
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}

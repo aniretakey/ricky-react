@@ -1,0 +1,38 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: min(200px, 15vh);
+}
+
+.homeLink {
+  color: var(--black-color);
+  font-size: 18px;
+  background: url('../../assets/icons/portal_icon.png') no-repeat;
+  background-size: contain;
+  width: 80px;
+  height: 80px;
+  display: grid;
+  place-items: center;
+  transition: all 0.5s ease-out;
+  scale: 100%;
+}
+
+.homeLink::after {
+  content: 'Home';
+}
+
+.homeLink:hover {
+  transition: all 0.5s ease-out;
+  scale: 120%;
+}
+
+@media (max-width: 567px) { 
+  .homeLink{
+    width: 50px;
+    height: 50px;
+    font-size: 14px;
+  }
+
+}

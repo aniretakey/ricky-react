@@ -1,4 +1,5 @@
 {
+  "homepage": "https://aniretakey.github.io/ricky-react/",
   "name": "react-app",
   "private": true,
   "version": "0.0.0",
@@ -8,16 +9,50 @@
     "build": "tsc && vite build",
     "lint": "eslint --fix ./src",
     "format": "prettier -w ./src",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "precommit": "lint-staged && commitlint -E HUSKY_GIT_PARAMS",
+    "prepare": "husky install",
+    "deploy": "tsc && vite build && npx gh-pages -d dist"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.jsx": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.tsx": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.11.0",
+    "react-image": "^4.1.0",
     "react-redux": "^8.1.3",
     "react-router-dom": "^6.16.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.7.2",
+    "@commitlint/config-conventional": "^17.7.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
@@ -26,11 +61,15 @@
     "eslint": "^8.51.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "gh-pages": "^6.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
     "prettier": "3.0.3",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"

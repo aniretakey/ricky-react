@@ -1,0 +1,21 @@
+.input {
+  grid-area: input;
+
+  font-family: "Autour One", cursive;
+  font-size: 1.5em;
+  color: var(--black-color);
+
+  margin: .2em 0;
+  padding: .4em .9em;
+  border-radius: 1em 1.6em;
+  border: none;
+  width: 100%;
+}
+
+.inputCorrect:focus {
+  outline: 6px solid var(--light-green-color);
+}
+
+.inputError:focus {
+  outline: 6px solid var(--red-color);
+}
