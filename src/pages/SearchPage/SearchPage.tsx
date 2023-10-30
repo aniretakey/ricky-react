@@ -1,22 +1,61 @@
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+
 import { Search } from '../../components/Search';
-import styles from './SearchPage.module.css';
-import { useGetCharacterByNameQuery } from '../../store/characters/characters.api.ts';
 import { CardSmall } from '../../components/CardSmall';
+
+import { useLazyGetCharacterByNameQuery } from '../../store/characters/characters.api.ts';
+import { CharacterType } from "../../models/card.model.ts";
+
+import styles from './SearchPage.module.css';
 
 export function SearchPage(): ReactElement {
   const location = useLocation();
+  const [page, setPage] = useState<number>(1)
+  const [cards, setCards] = useState<CharacterType[]>([]);
+  const [getLazyCharacterByName] = useLazyGetCharacterByNameQuery()
   const searchName = new URLSearchParams(location.search);
   const name = searchName.get('name');
-  // TODO сделать значения из url сохранялось в истории и в search input
-  const { data } = useGetCharacterByNameQuery(name ?? '');
+
+  const fetchData = async (query: string, page: number): Promise<void> => {
+    const response = await getLazyCharacterByName({ name: query, page: String(page) })
+
+    setCards(prevState => {
+      if (response?.data?.results)
+        return [...prevState, ...response.data.results]
+      else
+        return prevState
+    })
+  }
+
+  const checkPosition = (): void => {
+    const height = document.body.offsetHeight;
+    const screenHeight = window.innerHeight;
+    const scrolled = window.scrollY;
+
+    const threshold = height - scrolled - screenHeight;
+    if (threshold < 10) {
+      setPage((prevPage) => {
+        const nextPage = prevPage + 1;
+        fetchData(name ?? '', page);
+        return nextPage;
+      });
+    }
+  }
+
+  useEffect(() => {
+    fetchData(name??'', page)
+    window.addEventListener('scroll', checkPosition)
+    return () => {
+      window.removeEventListener('scroll', checkPosition)
+    }
+  }, []);
 
   return (
     <div className={styles.wrapper}>
       <Search />
       <div className={styles.cards}>
-        {data?.results.map((item) => (
+        {cards?.map((item) => (
           <CardSmall
             key={item.id}
             id={item.id}

@@ -18,13 +18,12 @@ export function Search(): ReactElement {
   const [dropdown, setDropdown] = useState<boolean>(false);
   const { value } = useAppSelector((state) => state.searchValues);
   const debounced = useDebounce(value);
-  const { data, isError } = useGetCharacterByNameQuery(debounced, { skip: debounced.length < 3 });
+  const { data, isError } = useGetCharacterByNameQuery({name: debounced, page: '1'}, { skip: debounced.length < 3 });
 
   useEffect(() => {
     setDropdown(debounced.length >= 3 && data?.results.length! > 0);
   }, [debounced, data?.results]);
 
-  // TODO сделать с помощью useDeferredValue (https://www.youtube.com/watch?v=jCGMedd6IWA&ab_channel=WebDevSimplified)
   const focus = (): void => {
     inputRef.current?.focus();
   };
@@ -47,7 +46,6 @@ export function Search(): ReactElement {
 
   const handleClick: MouseEventHandler = (): void => {
     focus();
-    // setDropdown(debounced.length >= 3 && data?.results.length! > 0);
     if (inputRef.current?.value.trim().length !== 0) {
       handleSearch();
     }

@@ -10,9 +10,6 @@ export const charactersApi = createApi({
     getCharacterById: build.query<CharacterType, number>({
       query: (characterId) => `/character/${characterId}`,
     }),
-    getAllCharacters: build.query<RickyTypes, null>({
-      query: () => '/character',
-    }),
     getCharacterByPage: build.query<RickyTypes, number>({
       query: (page) => ({
         url: '/character/',
@@ -21,15 +18,21 @@ export const charactersApi = createApi({
         }
       }),
     }),
-    getCharacterByName: build.query<RickyTypes, string>({
-      query: (name) => ({
+    getCharacterByName: build.query<RickyTypes, { name: string, page: string }>({
+      query: ({ name, page }) => ({
         url: '/character/',
         params: {
           name,
+          page
         },
       }),
     }),
   }),
 });
 
-export const { useGetCharacterByIdQuery, useGetAllCharactersQuery, useGetCharacterByNameQuery, useLazyGetCharacterByPageQuery } = charactersApi;
+export const {
+  useGetCharacterByIdQuery,
+  useGetCharacterByNameQuery,
+  useLazyGetCharacterByNameQuery,
+  useLazyGetCharacterByPageQuery
+} = charactersApi;
