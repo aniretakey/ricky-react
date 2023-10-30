@@ -1,10 +1,10 @@
 import { KeyboardEventHandler, MouseEventHandler, ReactElement, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useActions } from '../../hooks/useActions.ts';
 import { ImSearch } from 'react-icons/im';
-
+import { useActions } from '../../hooks/useActions.ts';
 import { useGetCharacterByNameQuery } from '../../store/characters/characters.api.ts';
 import { useAppSelector } from '../../hooks/useAppSelector.ts';
+
 import { useDebounce } from '../../hooks/useDebounce.ts';
 import { Input } from '../Input';
 import { CharacterType } from '../../models/card.model.ts';
