@@ -7,6 +7,8 @@ import { Like } from '../Like';
 import { useActions } from '../../hooks/useActions.ts';
 import { useAppSelector } from '../../hooks/useAppSelector.ts';
 import styles from './CardSmall.module.css';
+import { Img } from "react-image";
+import { Loader } from "../Loader";
 
 export const CardSmall = ({ image, name, id }: CharacterType): ReactElement => {
   const [active, setActive] = useState(false);
@@ -46,7 +48,13 @@ export const CardSmall = ({ image, name, id }: CharacterType): ReactElement => {
       </div>
       <h3 className={styles.title}>{name}</h3>
       <div className={styles.image}>
-        <img src={image} alt={name} />
+        <Img
+          src={image}
+          loader={<Loader />}
+          unloader={<Loader />}
+          loading='lazy'
+          alt={name}
+        />
       </div>
       <Button buttonText="Details" handleClick={handleDetailsClick} />
     </div>

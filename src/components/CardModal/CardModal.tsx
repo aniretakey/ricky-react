@@ -7,6 +7,7 @@ import { Modal } from '../Modal';
 import { Loader } from '../Loader';
 
 import styles from './CardModal.module.css';
+import { Img } from "react-image";
 
 export const CardModal = (): ReactElement => {
   const { id } = useParams();
@@ -31,7 +32,13 @@ export const CardModal = (): ReactElement => {
       : 
       ( <div className={styles.cardOpen}>
         <div className={styles.imageOpen}>
-          <img src={data?.image} alt={data?.name} />
+          <Img
+            src={data?.image ?? 'https://rickandmortyapi.com/api/character/avatar/19.jpeg'}
+            alt={data?.name}
+            loading='lazy'
+            loader={<Loader />}
+            unloader={<Loader />}
+          />
         </div>
         <div className={styles.description}>
           <ul>
